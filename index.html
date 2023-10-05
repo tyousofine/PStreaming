@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syncopate&family=Syne&display=swap"
+      rel="stylesheet"
+    />
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <!-- Script -->
+    <script src="main.js" defer></script>
+
+  <title>Plug Streaming Pattern Library</title>
+</head>
+
+<body>
+<section class="banner-container">
+    <img class="logoImg" src="./images/PlugStreaming.png" width="140" />
+  <!-- Title -->
+  <div class="headers-container">
+    <h1>Plug Streaming Pattern Library</h1>
+    <h6>
+      Powering Creativity, Inspiring Confidence, Captivating Attention
+    </h6>
+  </div>
+</section>
+
+  <!-- Content -->
+  <section id="sec-content">
+    <!-- Content list -->
+    <div class="contentLeft">
+      <ul class="categoryList">
+        <li class="categoryTitle">
+          <h4>General</h4>
+        </li>
+        <li class="category" onclick="openPage('color')">Color</li>
+        <li class="category" onclick="openPage('typography')">TypoGraphy</li>
+        <li class="category" onclick="openPage('pagelayout')">Page Layout</li>
+        <li class="category" onclick="openPage('dataVisualization')">
+          Data Visualization
+        </li>
+
+        <li class="categoryTitle">
+          <h4>Elements</h4>
+        </li>
+        <li class="category" onclick="openPage('button')">Buttons</li>
+        <li class="category" onclick="openPage('form')">Form</li>
+        <li class="category" onclick="openPage('notifications')">
+          Notification
+        </li>
+        <li class="category" onclick="openPage('navigation')">Navigation</li>
+        <li class="category" onclick="openPage('stat_data')">Lists</li>
+        <li class="category" onclick="openPage('dialogs')">Images</li>
+      </ul>
+    </div>
+
+    <!-- Content -->
+    <div class="contentRight">
+  
+    <!-- Color Start -->
+  <div id="color" class="contentContainer active">
+            <h1 class="contentTitle">colors</h2>
+            <!-- Please write your code below this line -->
+            <h3>Brand color</h3>
+            <span class="colorCircle softGreen">
+              <p>
+                Orange <br />
+                #FF7119
+              </p>
+            </span>
+            <h3>Secondary colors</h3>
+            <div class="funcColorContainer">
+              <span class="colorCircle nightBlack">
+                <p>
+                  Night Black <br />
+                  #1C1C1C
+                </p>
+              </span>
+              <span class="colorCircle silver">
+                <p>
+                  Silver <br />
+                  #C0C0C0
+                </p>
+              </span>
+              <span class="colorCircle gold">
+                <p>
+                  Harvest Gold <br />
+                  #DA9100
+                </p>
+              </span>
+            
+            </div>
+  
+          <h3>Functional colors</h3>
+          <div class="funcColorContainer">
+            <span class="colorCircle nightBlack">
+              <p>
+                Night Black <br />
+                #1C1C1C
+              </p>
+            </span>
+           
+            <span class="colorCircle warmGrey">
+              <p>
+                Warm Grey <br />
+                #8C8C8C
+              </p>
+            </span>
+            <span class="colorCircle darkGrey">
+              <p>
+                Dark Grey <br />
+                #332F2F
+              </p>
+            </span>
+            <span class="colorCircle darkWhite">
+              <p>
+                Light Grey <br />
+                #DBD9D2
+              </p>
+            </span>
+            <span class="colorCircle cream">
+              <p>
+                Cream <br />
+                #EFEEEA
+              </p>
+            </span>
+          </div>
+  
+          <h3>Feedback colors</h3>
+          <div class="fedColorContainer">
+            <span class="colorCircle softOrange">
+              <p>
+                Soft Orange <br />
+                #F0944D
+              </p>
+            </span>
+            <span class="colorCircle pastelGreen">
+              <p>
+                Pastel Green <br />
+                #C8E1CC
+              </p>
+            </span>
+            <span class="colorCircle pastelYellow">
+              <p>
+                Pastel Yellow <br />
+                #fBEECA
+              </p>
+            </span>
+          </div>
+
+  </div>
+    <!-- Color End -->
+
+
+    <!-- Typography Start -->
+       <div id="typography" class="contentContainer">
+        <h1 class="contentTitle">Typography</h1>
+        test test</div>
+    <!--Typograhy end--> 
+
+  <!-- Pagelayout Start -->
+      <div id="pagelayout" class="contentContainer">
+        <h1 class="contentTitle">page layout</h1>
+      </div>
+  <!-- Pagelayout End -->
+
+  <!-- Data Visualization Start -->
+      <div id="dataVisualization" class="contentContainer">
+        <h1 class="contentTitle">Data Visualization</h1>
+     </div>
+  <!-- Data Visualization End -->
+
+  <!-- Button Start -->
+      <div id="button" class="contentContainer">
+        <h1 class="contentTitle">button</h1>
+      </div>
+  <!-- Button End -->
+
+  <!-- Form Start -->
+      <div id="form" class="contentContainer">
+        <h1 class="contentTitle">form</h1>
+        </div>
+    <!-- Form end -->
+
+    <!--Notification badge-->
+        <div class="contentContainer" id="notifications">
+          <h2  class="contentTitle">Notification badge</h2>
+          </div>
+        
+    <!-- Notifications End -->
+
+   <!--table Start-->
+   <div id="navigation" class="contentContainer">
+    <h1 class="contentTitle">navigation</h1>
+  </div>
+  <!--table end-->  
+
+  <!-- Stat/Data Start -->
+  <div id="stat_data" class="contentContainer">
+    <h1 class="contentTitle">lists</h1>
+   
+  </div>
+    <!-- Stat/Data End -->
+
+    <!-- Dialogs Start -->
+      <div id="images" class="contentContainer">
+        <h1 class="contentTitle">dialogs</h1>
+       <!--Modal window  -->
+      </div>
+    <!-- Dialogs End -->
+   
+  </section>
+  </body>
+</body>
+</html>

@@ -15,9 +15,9 @@
  
   
     /* Feedback colors */
-    --fed-orange: #f0944d;
-    --fed-green: #c8e1cc;
-    --fed-yellow: #fdfd96;
+    --pastel-orange: #f0944d;
+    --pastel-green: #c8e1cc;
+    --pastel-yellow: #fdfd96;
 
     /* text-Colors */
     --font-on-Dark: #ffffff;
@@ -148,7 +148,7 @@
   }
   
   .funcColorContainer,
-  .fedColorContainer {
+    .noteColorContainer {
     display: flex;
     flex-wrap: wrap;
   }
@@ -199,11 +199,11 @@
   }
   
   .softOrange {
-    background-color: var(--fed-orange);
+    background-color: var(--pastel-orange);
   }
 
   .pastelGreen {
-    background-color: var(--fed-green);
+    background-color: var(--pastel-green);
     border: 1px solid lightgreen
   }
 
@@ -212,7 +212,7 @@
   }
 
   .pastelYellow {
-    background-color: var(--fed-yellow);
+    background-color: var(--pastel-yellow);
   }
 
   .pastelYellow p {

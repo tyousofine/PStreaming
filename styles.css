@@ -21,44 +21,62 @@
 
     /* text-Colors */
     --font-on-Dark: #ffffff;
-    --bg-color: #d8d8d8;
+    --bg-color: #ecece9;
   }
   
   body {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+
     font-family: 'Syncopate', sans-serif;  
+    /* font-family: 'Monserrat', sans-serif;   */
     text-align: center;
     background-color: var(--bg-color);
     color: var(--sub-black);
   }
   
-  section {
-    text-align: center;
+  /* LIBRARY STYLES */
+  /* banner */
+
+  .main-nav {
+    background-color: var(--sub-black);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
   }
   
-  /* banner */
+  .main-nav a {
+    color: var(--main-color);
+    text-decoration: none;
+    padding: 10px;
+  }
+
+
+  .main-nav a:hover {
+    text-shadow: 0 0 10px var(--sec-silver);
+    cursor: pointer;
+  }
+
+  .main-nav div {
+    margin-left: auto;
+  }
+
+
  .banner-container {
     display: flex;
     width: 100vw;
     background-color: var(--sub-black);
     color: var(--font-on-Dark);
     text-transform: uppercase;
-    gap: 10%;
+    justify-content: center;
     border-bottom: 1px solid var(--sec-silver);
  }
 
- .banner-container img {
-    padding-left: 50px;
- }
-
- .headers-container {
-    text-align: left;
- }
-
  .headers-container h1 {
-    font-size: 2.1rem;
+    font-size: 3rem;
+    padding: 0;
+    margin: 0;
  }
   
   /* Section - content */
@@ -96,7 +114,7 @@
   }
 
   .category:hover {
-    text-shadow: 0 0 5px #FFD700;
+    text-shadow: 0 0 5px var(--sec-silver);
     cursor: pointer;
 }
   
@@ -184,11 +202,15 @@
 
 .darkWhite p {
       color: var(--sub-black)
+  }
 
+  .maroon {
+    background-color: #821214
   }
   
   .cream {
     background-color: var(--sub-cream);
+    border: 1px solid #Dbd9d2
   }
   .cream p {
     color:var(--sub-black)
@@ -218,5 +240,12 @@
   .pastelYellow p {
     color: var(--sub-black)
   }
-  
+
+
+
+  /* DASHBOARD STYLES */
+  .dashboard {
+    height: 100vh;
+    background-color: var(--sub-black);
+  }
  

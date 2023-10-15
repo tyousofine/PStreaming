@@ -14,24 +14,36 @@
       href="https://fonts.googleapis.com/css2?family=Syncopate&family=Syne&display=swap"
       rel="stylesheet"
     />
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Script -->
     <script src="main.js" defer></script>
+    
 
   <title>Plug Streaming Pattern Library</title>
 </head>
 
 <body>
-<section class="banner-container">
-    <img class="logoImg" src="./images/PlugStreaming.png" width="140" />
-  <!-- Title -->
+  
+  <nav class="main-nav">
+    <img class="logoImg" src="./images/PlugStreaming_copy.png" width="140" height="" />
+    <div>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="index.html">Library</a>
+    </div>
+  </nav>
+
+
+  <section class="banner-container">
+    <!-- Title -->
   <div class="headers-container">
-    <h1>Plug Streaming Pattern Library</h1>
-    <h6>
+    <h1>Plug Streaming</h1>
+    <h5>
       Powering Creativity, Inspiring Confidence, Captivating Attention
-    </h6>
+    </h5>
   </div>
 </section>
 
@@ -54,13 +66,14 @@
           <h4>Elements</h4>
         </li>
         <li class="category" onclick="openPage('button')">Buttons</li>
+        <li class="category" onclick="openPage('link')">Links</li>
         <li class="category" onclick="openPage('form')">Form</li>
         <li class="category" onclick="openPage('notifications')">
           Notification
         </li>
         <li class="category" onclick="openPage('navigation')">Navigation</li>
-        <li class="category" onclick="openPage('stat_data')">Lists</li>
-        <li class="category" onclick="openPage('dialogs')">Images</li>
+        <li class="category" onclick="openPage('list')">Lists</li>
+      
       </ul>
     </div>
 
@@ -78,7 +91,7 @@
                 #FF7119
               </p>
             </span>
-            <h3>Secondary colors</h3>
+            <h3>Primary Colors</h3>
             <div class="funcColorContainer">
               <span class="colorCircle nightBlack">
                 <p>
@@ -100,28 +113,33 @@
               </span>
             
             </div>
+
+            <h3>Background colors</h3>
+            <div class="funcColorContainer">
+              <span class="colorCircle nightBlack">
+                <p>
+                  Night Black <br />
+                  #1C1C1C
+                </p>
+              </span>
+             
+              <span class="colorCircle warmGrey">
+                <p>
+                  Warm Grey <br />
+                  #8C8C8C
+                </p>
+              </span>
+              <span class="colorCircle darkGrey">
+                <p>
+                  Dark Grey <br />
+                  #332F2F
+                </p>
+              </span>
+            
+            </div>
   
-          <h3>Functional colors</h3>
-          <div class="funcColorContainer">
-            <span class="colorCircle nightBlack">
-              <p>
-                Night Black <br />
-                #1C1C1C
-              </p>
-            </span>
-           
-            <span class="colorCircle warmGrey">
-              <p>
-                Warm Grey <br />
-                #8C8C8C
-              </p>
-            </span>
-            <span class="colorCircle darkGrey">
-              <p>
-                Dark Grey <br />
-                #332F2F
-              </p>
-            </span>
+            <div>
+              <h3>Other Category</h3>
             <span class="colorCircle darkWhite">
               <p>
                 Light Grey <br />
@@ -135,6 +153,42 @@
               </p>
             </span>
           </div>
+  
+          <h3>Chart Data colors</h3>
+          <div class="funcColorContainer">
+            <span class="colorCircle maroon">
+              <p>
+                Maroon <br />
+                #821214
+              </p>
+            </span>
+           
+            <span class="colorCircle gold">
+              <p>
+                Harvest Gold <br />
+                #DA9100
+              </p>
+            </span>
+            <span class="colorCircle darkGrey">
+              <p>
+               Some Other color <br />
+               
+              </p>
+            </span>
+            <span class="colorCircle darkWhite">
+              <p>
+                some other color <br />
+               
+              </p>
+            </span>
+            <span class="colorCircle cream">
+              <p>
+                some other color <br />
+           
+              </p>
+            </span>
+          </div>
+
   
           <h3>Feedback colors</h3>
           <div class="noteColorContainer">
@@ -157,7 +211,7 @@
               </p>
             </span>
           </div>
-
+         
   </div>
     <!-- Color End -->
 
@@ -165,36 +219,58 @@
     <!-- Typography Start -->
        <div id="typography" class="contentContainer">
         <h1 class="contentTitle">Typography</h1>
-        test test</div>
+         <!-- Please write your code below this line -->
+
+        For headers and menues: Syncopate
+        For rest of content: Montserrat
+
+        for chart data: Noto serif
+
+        test test
+        
+        </div>
     <!--Typograhy end--> 
 
   <!-- Pagelayout Start -->
       <div id="pagelayout" class="contentContainer">
         <h1 class="contentTitle">page layout</h1>
+         <!-- Please write your code below this line -->
       </div>
   <!-- Pagelayout End -->
 
   <!-- Data Visualization Start -->
       <div id="dataVisualization" class="contentContainer">
         <h1 class="contentTitle">Data Visualization</h1>
+         <!-- Please write your code below this line -->
      </div>
   <!-- Data Visualization End -->
 
   <!-- Button Start -->
       <div id="button" class="contentContainer">
-        <h1 class="contentTitle">button</h1>
+        <h1 class="contentTitle">buttons</h1>
+         <!-- Please write your code below this line -->
       </div>
   <!-- Button End -->
+
+  <!-- Links Start -->
+  <div id="link" class="contentContainer">
+    <h1 class="contentTitle">Links</h1>
+     <!-- Please write your code below this line -->
+  </div>
+
+  <!-- Links End -->
 
   <!-- Form Start -->
       <div id="form" class="contentContainer">
         <h1 class="contentTitle">form</h1>
+         <!-- Please write your code below this line -->
         </div>
     <!-- Form end -->
 
     <!--Notification badge-->
         <div class="contentContainer" id="notifications">
           <h2  class="contentTitle">Notification badge</h2>
+           <!-- Please write your code below this line -->
           </div>
         
     <!-- Notifications End -->
@@ -202,23 +278,19 @@
    <!--table Start-->
    <div id="navigation" class="contentContainer">
     <h1 class="contentTitle">navigation</h1>
+     <!-- Please write your code below this line -->
   </div>
   <!--table end-->  
 
-  <!-- Stat/Data Start -->
-  <div id="stat_data" class="contentContainer">
-    <h1 class="contentTitle">lists</h1>
-   
-  </div>
-    <!-- Stat/Data End -->
 
-    <!-- Dialogs Start -->
-      <div id="images" class="contentContainer">
-        <h1 class="contentTitle">dialogs</h1>
-       <!--Modal window  -->
+    <!-- Lists Start -->
+    <div id="list" class="contentContainer">
+      <h1 class="contentTitle">Lists</h1>
+       <!-- Please write your code below this line -->
       </div>
-    <!-- Dialogs End -->
-   
+    <!-- Lists End -->
+
+
   </section>
   </body>
 </body>

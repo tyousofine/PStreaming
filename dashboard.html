@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://d3js.org/d3.v7.min.js"></script>
+
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,6 +15,7 @@
     <link rel="stylesheet" href="dashboardStyles.css" />
     <title>Dashboard</title>
   </head>
+
   <body id="dashboard">
     <nav class="main-nav">
       <img class="logoImg" src="./images/PlugStreaming_copy.png" width="140" />
@@ -23,11 +25,41 @@
       </div>
     </nav>
 
-    <h1>DASHBOARD CONTENT COMMING SOON!</h1>
+    <section class="banner-container">
+      <!-- Title -->
+      <div class="headers-container">
+        <h1>Plug Streaming</h1>
+        <h5>
+          Powering Creativity, Inspiring Confidence, Captivating Attention
+        </h5>
+      </div>
+    </section>
+
+    <section class="main">
+      <div class="navbar-left">
+        <ul class="">
+          <li class="categoryTitle"></li>
+          <li>item 1</li>
+          <li>item 2</li>
+          <li>item 3</li>
+          <li>item 4</li>
+        </ul>
+      </div>
+
+      <main class="main-content">
+        <h1>DASHBOARD CONTENT COMMING SOON!</h1>
+        <div class="charts-container">
+          <div class="chart1">chart 1</div>
+          <div class="chart1">chart 2</div>
+          <div class="chart1">chart 2</div>
+          <div class="chart1">chart 2</div>
+        </div>
+      </main>
+    </section>
     <script>
       // Create an SVG element
       var svg = d3
-        .select("body")
+        .selectAll(".chart1")
         .append("svg")
         .attr("width", 200)
         .attr("height", 200);
@@ -38,7 +70,21 @@
         .attr("cx", 100)
         .attr("cy", 100)
         .attr("r", 50)
-        .style("fill", "green");
+        .style("fill", "purple");
+
+      svg
+        .append("circle")
+        .attr("cx", 50)
+        .attr("cy", 50)
+        .attr("r", 25)
+        .style("fill", "blue");
+
+      svg
+        .append("circle")
+        .attr("cx", 150)
+        .attr("cy", 150)
+        .attr("r", 25)
+        .style("fill", "maroon");
     </script>
   </body>
 </html>

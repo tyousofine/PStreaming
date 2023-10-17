@@ -1,18 +1,28 @@
 :root {
     /* Brand color */
-    --main-color: #FF7119;
+    --brand-color: #FF7119;
 
     /* secondary colors */
     --sec-gold: #da9100;
     --sec-silver: #c0c0c0;
+    --sec-brass: #D4Af37;
+
   
-    /* Functional colors */
-    --sub-black: #1c1c1c;
-    --sub-cream: #efeeea;
-    --sub-dark-white: #dbd9d2;
-    --sub-grey: #403b3b;
-    --sub-light-grey: #8c8c8c;
- 
+    /* backgroun colors for dashboard */
+    --bg-sides: #121212;
+    --bg-main: #1c1c1c;
+    --bg-chart: #2c2b2b;
+
+    /* chart elements colors */
+    --chart-color1: #75A6e5;
+    --chart-color2: #9b7cb6;
+    --chart-color3: blue;
+    --chart-color4: purple;
+    --chart-color5: maroon;
+
+
+    --bg-library: #ecece9;
+  
   
     /* Feedback colors */
     --pastel-orange: #f0944d;
@@ -20,39 +30,39 @@
     --pastel-yellow: #fdfd96;
 
     /* text-Colors */
-    --font-on-Dark: #ffffff;
-    --bg-color: #ecece9;
+    --font-on-dark: #ffffff;
+    --font-on-light: #121212;
+
   }
   
   body {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-
     font-family: 'Syncopate', sans-serif;  
     /* font-family: 'Monserrat', sans-serif;   */
     text-align: center;
-    background-color: var(--bg-color);
-    color: var(--sub-black);
+    background-color: var(--bg-library);
+
   }
   
   /* LIBRARY STYLES */
   /* banner */
 
   .main-nav {
-    background-color: var(--sub-black);
+    background-color: var(--bg-sides);
     display: flex;
     gap: 1rem;
     align-items: center;
+    margin: 0;
+    padding: 0;
   }
   
   .main-nav a {
-    color: var(--main-color);
+    color: var(--brand-color);
     text-decoration: none;
     padding: 10px;
   }
-
-
   .main-nav a:hover {
     text-shadow: 0 0 10px var(--sec-silver);
     cursor: pointer;
@@ -65,12 +75,15 @@
 
  .banner-container {
     display: flex;
-    width: 100vw;
-    background-color: var(--sub-black);
-    color: var(--font-on-Dark);
+    width: 100%;
+    background-color: var(--bg-sides);
+    color: var(--font-on-dark);
     text-transform: uppercase;
     justify-content: center;
     border-bottom: 1px solid var(--sec-silver);
+    margin: 0;
+    padding: 0;
+    padding-bottom: 2%;
  }
 
  .headers-container h1 {
@@ -91,8 +104,8 @@
   .contentLeft {
    max-width: 300px;
     min-width: 250px;
-    background-color: var(--sub-black);
-    color: var(--font-on-Dark);
+    background-color: var(--bg-sides);
+    color: var(--font-on-dark);
     padding-left: 10px;
     min-height: 100vh;
   }
@@ -104,7 +117,7 @@
   }
   
   .categoryTitle {
-    color: var(--main-color);
+    color: var(--brand-color);
   }
   
   .category {
@@ -153,7 +166,7 @@
     flex-direction: column;
     width: 120px;
     height: 120px;
-    border: 1px solid var(--sub-cool-beige);
+  
     border-radius: 50%;
     text-align: center;
     margin: 10px;
@@ -172,7 +185,7 @@
   }
   
   .softGreen {
-    background-color: var(--main-color);
+    background-color: var(--brand-color);
   }
 
   .silver {
@@ -182,42 +195,54 @@
   .gold {
     background-color: var(--sec-gold);
   }
-  
-  .coolBeige {
-    background-color: var(--sub-cool-beige);
+
+  .brass {
+    background-color: var(--sec-brass);
   }
   
-  .warmGrey {
-    background-color: var(--sub-light-grey);
-  }
+
   
   .darkGrey {
-    background-color: var(--sub-grey);
+    background-color: var(--bg-chart);
+  }
+
+  .charcoil {
+    background-color: var(--bg-main);
   }
   
   .darkWhite {
-    background-color: var(--sub-dark-white);
+    background-color: white;
     border: 1px solid rgb(212, 198, 198)
 }
 
 .darkWhite p {
-      color: var(--sub-black)
+      color: var(--font-on-light)
   }
 
   .maroon {
     background-color: #821214
   }
+
+  .purple {
+    background-color: var(--chart-color4);
+  }
+
+  .blue {
+    background-color: var(--chart-color3);
+  }
+
+  .lavendar {
+    background-color: var(--chart-color2);
+  }
+
+  .lightBlue {
+    background-color: var(--chart-color1);
+  }
   
-  .cream {
-    background-color: var(--sub-cream);
-    border: 1px solid #Dbd9d2
-  }
-  .cream p {
-    color:var(--sub-black)
-  }
+
   
   .nightBlack {
-    background-color: var(--sub-black);
+    background-color: var(--bg-sides);
   }
   
   .softOrange {
@@ -230,7 +255,7 @@
   }
 
   .pastelGreen p {
-    color: var(--sub-black)
+    color: var(--bg-sides)
   }
 
   .pastelYellow {
@@ -238,7 +263,7 @@
   }
 
   .pastelYellow p {
-    color: var(--sub-black)
+    color: var(--bg-sides)
   }
 
 

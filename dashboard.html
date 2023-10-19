@@ -12,6 +12,14 @@
       href="https://fonts.googleapis.com/css2?family=Syncopate&family=Syne&display=swap"
       rel="stylesheet"
     />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Serif:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="dashboardStyles.css" />
     <title>Dashboard</title>
   </head>
@@ -39,21 +47,23 @@
       <div class="navbar-left">
         <ul class="">
           <li class="categoryTitle"></li>
-          <li>item 1</li>
-          <li>item 2</li>
-          <li>item 3</li>
-          <li>item 4</li>
+          <li>Dashboard</li>
+          <li>Youtubers by Country</li>
+          <li>Youtubes by Topic</li>
+          <li>Commnet Relationship</li>
         </ul>
+        <button class="btn">button sample</button>
       </div>
 
       <main class="main-content">
         <h1>DASHBOARD CONTENT COMMING SOON!</h1>
         <div class="charts-container">
-          <div class="chart1">chart 1</div>
-          <div class="chart1">chart 2</div>
-          <div class="chart1">chart 2</div>
-          <div class="chart1">chart 2</div>
+          <div class="chart1">Propotion of Youtubers in each Country</div>
+          <div class="chart1">Number of Youtubers by Topic</div>
+          <div class="chart1">Most Likes</div>
+          <div class="chart1">another chart</div>
         </div>
+        <button class="btn">button sample</button>
       </main>
     </section>
     <script>
@@ -80,10 +90,11 @@
         .style("fill", "blue");
 
       svg
-        .append("circle")
-        .attr("cx", 150)
-        .attr("cy", 150)
-        .attr("r", 25)
+        .append("rect")
+        .attr("x", 120)
+        .attr("y", 100)
+        .attr("width", 50)
+        .attr("height", 50)
         .style("fill", "maroon");
     </script>
   </body>

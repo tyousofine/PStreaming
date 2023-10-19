@@ -67,12 +67,12 @@
         </li>
         <li class="category" onclick="openPage('button')">Buttons</li>
         <li class="category" onclick="openPage('link')">Links</li>
-        <li class="category" onclick="openPage('form')">Form</li>
+        <li class="category" onclick="openPage('header')">Header</li>
         <li class="category" onclick="openPage('notifications')">
           Notification
         </li>
         <li class="category" onclick="openPage('navigation')">Navigation</li>
-        <li class="category" onclick="openPage('list')">Lists</li>
+     
       
       </ul>
     </div>
@@ -85,15 +85,12 @@
             <h1 class="contentTitle">colors</h2>
             <!-- Please write your code below this line -->
             <h3>Brand color</h3>
-            <span class="colorCircle softGreen">
+            <span class="colorCircle orange">
               <p>
                 Orange <br />
                 #FF7119
               </p>
             </span>
-
-
-          
 
             <h3>Background colors - primary</h3>
             <div class="funcColorContainer">
@@ -224,16 +221,125 @@
     <!-- Typography Start -->
        <div id="typography" class="contentContainer">
         <h1 class="contentTitle">Typography</h1>
-         <!-- Please write your code below this line -->
+        <p class="page-description">
+          This section describes the fonts that we use in our dashboard,
+          different typography elements, their sizing and styling.
+        </p>
 
-        For headers and menues: Syncopate
-        For rest of content: Montserrat
-
-        for chart data: Noto serif
-
-        test test
-        
+        <h2>Font Family</h2>
+        <div class="font-family-container">
+          <div class="font-family">
+           <span id="syncopate-text">Syncopate</span>
+          </br>
+           <span id="montserrat-text">Montserrat</span>
+          </br>
+           <span id="noto-text">Noto</span>
+            <span id="desc-text"></span>
+          </div>
+          <div class="font-family-description">
+            <p class="paragraph description">
+              In our dashboard we use 3 Fonts - Syncopate, Monstserrat and Noto. The
+              first one, being more stylish and inspiring class is used titles. For content and for the purpose of readability, we use Montserrat font. For data representation and charts, we use noto, a serif font that pairs well with Montserrat. 
+            </p>
+          </div>
         </div>
+        <h2>Type Scale</h2>
+        <p class="paragraph page-description">
+          Below are presented type scales for all the headings and paragraphs
+          that we use in the dashboard. All headings are used in order to
+          highlight their sections, going from the highest importance to the
+          lowest.
+        </p>
+
+        <!-- Here is gonna be type scale -->
+        <div class="typescale-container">
+          <div class="typescale-item">
+            <div class="typescale-size">
+              <h1 id="heading-one">Heading One</h1>
+            </div>
+            <div class="typescale-type">
+              <p class="paragraph">48px, Syncopate, Bold</p>
+            </div>
+          </div>
+
+          <div class="typescale-item">
+            <div class="typescale-size">
+              <h2 id="heading-two">Heading Two</h2>
+            </div>
+            <div class="typescale-type">
+              <p class="paragraph">28px, Syncopate, Bold</p>
+            </div>
+          </div>
+
+          <div class="typescale-item">
+            <div class="typescale-size">
+              <h3 id="heading-three">Heading Three - used for list titles</h3>
+            </div>
+            <div class="typescale-type">
+              <p class="paragraph">16px, Syncopate</p>
+            </div>
+          </div>
+
+          <div class="typescale-item">
+            <div class="typescale-size">
+              <h4>List Items</h4>
+            </div>
+            <div class="typescale-type">
+              <p class="paragraph">(font size), (FontName) (weight)</p>
+            </div>
+          </div>
+
+          <div class="typescale-item">
+            <div class="typescale-size">
+              <p class="paragraph">Paragraph</p>
+            </div>
+            <div class="typescale-type">
+              <p class="paragraph">(font size), (FontName) (weight)</p>
+            </div>
+          </div>
+
+          <div class="typescale-item">
+            <div class="typescale-size">
+              <p class="aref">Chart Description</p>
+            </div>
+            <div class="typescale-type">
+              <p class="paragraph">(font size), (FontName) (weight)</p>
+            </div>
+          </div>
+        </div>
+        <h2>Special Characters</h2>
+        <p class="paragraph page-description">
+          Here is a list of special characters in fonts that we use.
+        </p>
+
+        <div class="special-chars">
+          <div class="typescale-item">
+            <div class="typescale-size">
+              <p class="aref">0123456789!@#$%^&*(){}”:;,.?/></p>
+            </div>
+            <div class="typescale-type">
+              <p class="paragraph">I(font size), (FontName) </p>
+            </div>
+          </div>
+          <div class="typescale-item">
+            <div class="typescale-size">
+              <p class="aref">0123456789!@#$%^&*(){}”:;,.?/></p>
+            </div>
+            <div class="typescale-type">
+              <p class="paragraph">(font size), (FontName)</p>
+            </div>
+          </div>
+          <div class="typescale-item">
+            <div class="typescale-size">
+              <p class="aref">0123456789!@#$%^&*(){}”:;,.?/></p>
+            </div>
+            <div class="typescale-type">
+              <p class="paragraph">(font size), (FontName)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+       
     <!--Typograhy end--> 
 
   <!-- Pagelayout Start -->
@@ -266,15 +372,15 @@
   <!-- Links End -->
 
   <!-- Form Start -->
-      <div id="form" class="contentContainer">
-        <h1 class="contentTitle">form</h1>
+      <div id="header" class="contentContainer">
+        <h1 class="contentTitle">Header</h1>
          <!-- Please write your code below this line -->
         </div>
     <!-- Form end -->
 
     <!--Notification badge-->
         <div class="contentContainer" id="notifications">
-          <h2  class="contentTitle">Notification badge</h2>
+          <h2  class="contentTitle">Notification</h2>
            <!-- Please write your code below this line -->
           </div>
         
@@ -286,15 +392,6 @@
      <!-- Please write your code below this line -->
   </div>
   <!--table end-->  
-
-
-    <!-- Lists Start -->
-    <div id="list" class="contentContainer">
-      <h1 class="contentTitle">Lists</h1>
-       <!-- Please write your code below this line -->
-      </div>
-    <!-- Lists End -->
-
 
   </section>
   </body>

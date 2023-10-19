@@ -22,6 +22,9 @@
 
 
     --bg-library: #ecece9;
+    --font-family-headers: 'Syncopate', sans-serif;  
+    --font-family-content: 'Montserrat', sans-serif;
+    --font-family-chart: 'noto', serif;
   
   
     /* Feedback colors */
@@ -39,8 +42,6 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: 'Syncopate', sans-serif;  
-    /* font-family: 'Monserrat', sans-serif;   */
     text-align: center;
     background-color: var(--bg-library);
 
@@ -56,6 +57,7 @@
     align-items: center;
     margin: 0;
     padding: 0;
+    font-family: var(--font-family-headers);
   }
   
   .main-nav a {
@@ -67,13 +69,12 @@
     text-shadow: 0 0 10px var(--sec-silver);
     cursor: pointer;
   }
-
+  
   .main-nav div {
     margin-left: auto;
   }
 
-
- .banner-container {
+  .banner-container {
     display: flex;
     width: 100%;
     background-color: var(--bg-sides);
@@ -84,8 +85,9 @@
     margin: 0;
     padding: 0;
     padding-bottom: 2%;
- }
-
+    font-family: var(--font-family-headers);
+  }
+  
  .headers-container h1 {
     font-size: 3rem;
     padding: 0;
@@ -97,7 +99,7 @@
   
   #sec-content {
     display: flex;
-    width: 80%;
+    width: 95%;
     gap: 20px
   }
   
@@ -108,6 +110,8 @@
     color: var(--font-on-dark);
     padding-left: 10px;
     min-height: 100vh;
+    font-family: var(--font-family-headers);
+
   }
   
   .categoryList {
@@ -133,7 +137,6 @@
   
   
   /* Content */
-  
   .contentRight {
     width: 80%;
     text-align: start;
@@ -141,6 +144,10 @@
   
   .contentContainer {
     display: none;
+  }
+
+  .contentContainer h3 {
+    font-family: var(--font-family-content);
   }
   
   .active {
@@ -150,14 +157,15 @@
   .contentTitle {
     text-transform: uppercase;
     font-size: 1.8rem;
+    font-family: var(--font-family-headers);
+
   }
-  
-  
   
   /* Content -  Color */
   #color h2 {
     text-transform: uppercase;
     font-weight: 300;
+    font-family: var(--font-family-content);
   }
   
   .colorCircle {
@@ -166,7 +174,7 @@
     flex-direction: column;
     width: 120px;
     height: 120px;
-  
+    font-family: var(--font-family-content);
     border-radius: 50%;
     text-align: center;
     margin: 10px;
@@ -184,7 +192,7 @@
     flex-wrap: wrap;
   }
   
-  .softGreen {
+  .orange {
     background-color: var(--brand-color);
   }
 
@@ -199,8 +207,6 @@
   .brass {
     background-color: var(--sec-brass);
   }
-  
-
   
   .darkGrey {
     background-color: var(--bg-chart);
@@ -239,8 +245,6 @@
     background-color: var(--chart-color1);
   }
   
-
-  
   .nightBlack {
     background-color: var(--bg-sides);
   }
@@ -266,11 +270,100 @@
     color: var(--bg-sides)
   }
 
+  /* content - typography */
 
-
-  /* DASHBOARD STYLES */
-  .dashboard {
-    height: 100vh;
-    background-color: var(--sub-black);
+  #typography {
+    width: 100%;
   }
- 
+
+  #typography p, span {
+    font-size: 1.1rem;
+  }
+
+  #typography h2, p {
+    font-family: var(--font-family-content);
+  }
+
+   .page-description {
+    font-family: var(--font-family-content);
+   }
+
+   .font-family-container {
+    display: flex;
+    gap: 20%;
+    
+  }
+
+  
+  #syncopate-text {
+    font-family: var(--font-family-headers);
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  #montserrat-text {
+    font-family: var(--font-family-content);
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  #noto-text {
+    font-family: var(--font-family-chart);
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  .font-family-description {
+    border-left: 1px solid var(--font-on-light);
+    padding-left: 10%; 
+  }
+
+  .typescale-container {
+    width: 100%
+  }
+
+  .typescale-size #heading-one{
+    font-family: var(--font-family-headers);
+    font-size: 48px;
+    font-weight: bold;
+    text-wrap: wrap;
+    
+  }
+
+  .typescale-size #heading-two{
+    font-family: var(--font-family-headers);
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .typescale-size #heading-three{
+    font-family: var(--font-family-headers);
+    font-size: 16px;
+    font-weight: bold;
+    text-wrap: wrap;
+  }
+
+  .typescale-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 5%;
+    margin-bottom: 20px
+  ;
+  }
+
+  .typescale-size {
+    width: 450px
+  }
+
+  .typescale-type {
+    border-left: 1px solid var(--bg-chart);
+    padding-left: 10%;
+
+  }
+
+
+
+
+
+  /* buttons section */

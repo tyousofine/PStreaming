@@ -97,13 +97,13 @@
   /* Section - content */
   /* Categories */
   
-  #sec-content {
+  .main-container {
     display: flex;
     width: 95%;
     gap: 20px
   }
   
-  .contentLeft {
+  .content-left {
    max-width: 300px;
     min-width: 250px;
     background-color: var(--bg-sides);
@@ -114,13 +114,13 @@
 
   }
   
-  .categoryList {
+  .category-list {
     list-style: none;
     text-align: start;
     padding: 0 10px;
   }
   
-  .categoryTitle {
+  .category-title {
     color: var(--brand-color);
   }
   
@@ -137,7 +137,7 @@
   
   
   /* Content */
-  .contentRight {
+  .content-right {
     width: 80%;
     text-align: start;
   }

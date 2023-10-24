@@ -10,7 +10,7 @@
   
     /* backgroun colors for dashboard */
     --bg-sides: #121212;
-    --bg-main: #1c1c1c;
+    --bg-main: #4B4A4A;
     --bg-chart: #2c2b2b;
 
     /* chart elements colors */
@@ -327,6 +327,7 @@
     font-size: 48px;
     font-weight: bold;
     text-wrap: wrap;
+    text-transform: uppercase;
     
   }
 

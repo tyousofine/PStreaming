@@ -126,11 +126,12 @@ body {
  
     }
 
-  .chart1 {
+  .chart1, .chart2 {
    padding: 3px;
     background-color: var(--bg-chart);
     border: 1px solid var(--bg-sides);
   }
+
 
   .btn {
     background-color: var(--sec-silver);

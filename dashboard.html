@@ -63,42 +63,71 @@
         <div class="charts-container">
           <div class="chart1">Propotion of Youtubers in each Country</div>
           <div class="chart1">Number of Youtubers by Topic</div>
-          <div class="chart1">Most Likes</div>
-          <div class="chart1">another chart</div>
+          <div class="chart2">Most Likes</div>
+          <div class="chart2">another chart</div>
         </div>
+
         <button class="btn">button sample</button>
       </main>
     </section>
     <script>
       // Create an SVG element
-      var svg = d3
+      var purpleSet = d3
         .selectAll(".chart1")
         .append("svg")
         .attr("width", 200)
         .attr("height", 200);
 
       // Append a circle to the SVG element
-      svg
+      purpleSet
         .append("circle")
         .attr("cx", 100)
         .attr("cy", 100)
         .attr("r", 50)
         .style("fill", "purple");
 
-      svg
+      purpleSet
         .append("circle")
         .attr("cx", 50)
         .attr("cy", 50)
         .attr("r", 25)
         .style("fill", "blue");
 
-      svg
+      purpleSet
         .append("rect")
         .attr("x", 120)
         .attr("y", 100)
         .attr("width", 50)
         .attr("height", 50)
         .style("fill", "maroon");
+
+      var goldSet = d3
+        .selectAll(".chart2")
+        .append("svg")
+        .attr("width", 200)
+        .attr("height", 200);
+
+      goldSet
+        .append("circle")
+        .attr("cx", 100)
+        .attr("cy", 100)
+        .attr("r", 50)
+        .style("fill", "#c0c0c0");
+
+      goldSet
+        .append("circle")
+        .attr("cx", 50)
+        .attr("cy", 50)
+        .attr("r", 25)
+        .style("fill", "#da9100");
+
+      goldSet
+        .append("rect")
+        .attr("x", 120)
+        .attr("y", 100)
+        .attr("width", 50)
+        .attr("height", 50)
+        .style("fill", "#FF7119");
     </script>
   </body>
 </html>

@@ -16,12 +16,31 @@
         </ul>
       </div>
       <div class="content-right">
-        <div class="content-container"></div>
-        <div class="content-container"></div>
-        <div class="content-container"></div>
-        <div class="content-container"></div>
+        <div class="chart"></div>
+        <div class="chart"></div>
+        <div class="chart"></div>
+        <div class="chart"></div>
         ...
       </div>
     </main>
+
+    <style>
+      .content-left {
+        display: none;
+      }
+
+      .content-right {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .navigation-hamburger {
+        height: 50vh;
+        width: 50vw;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    </style>
   </body>
 </html>

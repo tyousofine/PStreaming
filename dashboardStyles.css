@@ -108,14 +108,15 @@ body {
 .main {
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 .navbar-left {
   width: 20%;
   min-width: 150px;
   background-color: var(--bg-sides);
-  min-height: 100vh;
+  height: 100%;
+  min-height: 100%;
   text-align: left;
   padding: 0 3%;
 
@@ -149,11 +150,13 @@ body {
 }
 
 .main-content {
- width: 80%;
- flex-wrap: wrap;
- padding: 0 2%;
- background-color: var(--bg-main);
-height: 100vh;
+  width: 80%;
+  padding: 0 2%;
+  background-color: var(--bg-main);
+  height: 100%;
+  min-height: 100%;
+  overflow: scroll;
+
 }
 
 .main-content h1 {
@@ -162,25 +165,35 @@ height: 100vh;
   padding: 2% ;
 }
 
-.charts-container {
+.main-content .charts-container {
  display: grid;
   grid-template-columns: 1fr 1fr;
-  height: auto;
+  height: 100%;
+  min-height: 100vh;
+
 }
 
-
-
-.charts-container img {
-  width: 600px;
+.chart img {
+  max-width: 600px;
+  height: auto;
   box-shadow: 0px 0px 10px 1px #c0c0c044;
 /* 
   box-shadow: 0px 0px 10px 5px #12121244; */
 }
 
 @media only screen and (max-width: 800px) {
-  .charts-container {
+  .main-content .charts-container  {
     grid-template-columns: 1fr;
     gap: 5%;
+
+  }
+
+  .charts img {
+    max-width: 300px;
+  }
+
+  .navbar-left {
+    display: none;
   }
 
 }

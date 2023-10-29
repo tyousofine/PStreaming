@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Add CSS styles for the notification container */
+        .contentContainer {
+            width: 300px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        /* Style the notification title and icons */
+        .contentTitle {
+            font-size: 24px;
+            color: #333;
+            position: relative;
+            padding-left: 30px; /* Add padding to make space for the icons */
+        }
+
+        .icon-expand {
+            position: absolute;
+            left: 5px;
+        }
+
+        .icon-close {
+            position: absolute;
+            left: 25px;
+        }
+
+        /* Add some styles for the notification content (you can modify this) */
+        .notificationContent {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="contentContainer" id="notifications">
+        <h2 class="contentTitle">
+            <i class="fas fa-expand icon-expand"></i> <!-- Expand icon -->
+            <i class="fas fa-times icon-close"></i>   <!-- Close icon -->
+            Notification
+        </h2>
+        <p class="notificationContent">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p class="notificationContent">Suspendisse ac urna eget nunc bibendum aliquet.</p>
+        <p class="notificationContent">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+    </div>
+</body>
+</html>

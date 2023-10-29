@@ -11,6 +11,7 @@
     /* backgroun colors for dashboard */
     --bg-sides: #121212;
     --bg-main: #4B4A4A;
+    --bg-main: #4B4A4A;
     --bg-chart: #2c2b2b;
 
     /* chart elements colors */
@@ -553,8 +554,37 @@
 
   
 
+/* Notification section */
+.contentTitle a {
+  padding: 12px 0;
+  text-decoration: none;
+}
 
+.notiButtons {
+  background-color: #121212;
+  color: #ecece9;
+  font-family: Montserrat;
+  text-decoration: none;
+  padding: 12px 20px;
+  margin-right: 10px;
+  position: relative;
+  display: inline-block;
+  border-radius: 10px;
+}
 
+.notiButtons:hover{
+  transform: 1.1;
+  background-color: #FF7119;
+}
 
+.notiButtons .badge{
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background-color: #75A6e5;
+  color: white;
+}
 
   /* buttons section */

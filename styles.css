@@ -362,34 +362,6 @@
 
   }
 
-/* Navigation section */
-
-.navbar {
-  width: 100%;
-  background-color: #555;
-  overflow: auto;
-}
-
-.navbar a {
-  float: left;
-  padding: 12px;
-  color: white;
-  font-family: Syncopate, Montserrat, Noto;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.navbar a:hover {
-  background-color: #000;
-}
-
-@media screen and (max-width: 500px) {
-  .navbar a {
-    float: none;
-    display: block;
-  }
-}
-
 /* Notification section */
 .contentTitle a {
   padding: 12px 0;

@@ -52,9 +52,6 @@
     width: 100vw;
   }
 
-  /* p {
-    margin: 0
-  } */
   
   /* LIBRARY STYLES */
   /* banner */
@@ -65,7 +62,7 @@
     gap: 1rem;
     align-items: center;
     margin: 0;
-    padding: 0 2%;
+    padding: 1% 2%;
     font-family: var(--font-family-headers);
   }
   
@@ -84,7 +81,7 @@
   }
 
   .logoImg {
-    width: 150px;
+    width: 100px;
   }
 
 
@@ -98,9 +95,8 @@
     border-bottom: 1px solid var(--sec-silver);
     margin: 0;
     padding: 0;
-    padding-bottom: 2%;
+    padding-bottom: 5%;
     font-family: var(--font-family-headers);
-    padding: 2%;
   }
   
  .headers-container h1 {
@@ -237,7 +233,7 @@
     background-color: var(--bg-chart);
   }
 
-  .charcoil {
+  .charcoal {
     background-color: var(--bg-main);
   }
   
@@ -262,7 +258,7 @@
     background-color: var(--chart-color3);
   }
 
-  .lavendar {
+  .lavender {
     background-color: var(--chart-color2);
   }
 
@@ -404,7 +400,7 @@
   }
 
 
-  /* page layout sectioin */
+  /* page layout section */
   .layout-page {
       width: 90%;
 

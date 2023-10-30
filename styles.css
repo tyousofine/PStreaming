@@ -575,6 +575,7 @@
       padding: 0 20px;
     }
 
+
     .logoImg {
       width: 70px;
     }
@@ -590,6 +591,32 @@
     .hamburger {
       display: block;
     }
+    .mainLinks  {
+      display: none;
+    }
+
+    .nav-hamburger {
+      min-height: 50vh;
+      min-width: 180px;
+      max-width: 200px;
+      display: block;
+      background-color: var(--bg-sides);
+      color: var(--font-on-dark);
+      font-family: var(--font-family-headers);
+      padding: 20px 0;
+      zoom: 0.7;
+      position: fixed;
+      right: 0;
+      top: 240px;
+      border-radius: 8px;
+      width: 80px;
+      padding-top: 0;
+    }
+
+    .type-container {
+      zoom: 0.5;
+    }
+    
     
   }
 
@@ -636,18 +663,20 @@
       display: block;
       background-color: var(--bg-sides);
       color: var(--font-on-dark);
-      padding-left: 1%;
       font-family: var(--font-family-headers);
-      padding-top: 10px;
+      padding: 20px 0;
       zoom: 0.7;
       position: fixed;
       right: 0;
       top: 240px;
       border-radius: 8px;
       width: 80px;
+      padding-top: 0;
+    }
+     .type-container {
+      zoom: 0.8;
     }
     
-    /* additional code for table view */
   }
 
   

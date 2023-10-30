@@ -29,9 +29,15 @@
 
   <nav class="main-nav">
     <img class="logoImg" src="./images/PlugStreaming_small.png" />
-    <div>
+    <div class="mainLinks">
       <a href="dashboard.html">Dashboard</a>
       <a href="index.html">Library</a>
+    </div>
+    <div class="mainIcons">
+      <a href="dashboard.html"><img src="images/dashboard.png" alt="dashboard icon" width="24px" style="border-radius: 2px;"></a>
+      <a href="index.html"><img src="images/library.png" alt="library icon" width="26px"  style="border-radius: 2px;"></a>
+    </div>
+
     </div>
   </nav>
 
@@ -45,37 +51,35 @@
       </h5>
     </div>
   </section>
-
+  
   <!-- Content -->
   <main class="main-container">
+    <div><img class="hamburger" id="hamburger-links" src="images/hamburgerOrange.png" alt="" onclick="toggleHamburgerFunction()"></div>
     <!-- Content list -->
-    <div class="content-left">
-      <ul class="category-list">
-        <li class="category-title">
-          <h4>General</h4>
-        </li>
-        <li class="category" onclick="openPage('color')">Color</li>
-        <li class="category" onclick="openPage('typography')">TypoGraphy</li>
-        <li class="category" onclick="openPage('pagelayout')">Page Layout</li>
-        <li class="category" onclick="openPage('dataVisualization')">
-          Data Visualization
-        </li>
-
-        <li class="category-title">
-          <h4>Elements</h4>
-        </li>
-        <li class="category" onclick="openPage('button')">Buttons</li>
-        <li class="category" onclick="openPage('link')">Links</li>
-        <li class="category" onclick="openPage('header')">Header</li>
-        <li class="category" onclick="openPage('notifications')">
-          Notification
-        </li>
-        <li class="category" onclick="openPage('navigation')">Navigation</li>
-        <li class="category" onclick="openPage('select')">Select</li>
-      
-     
-      
-      </ul>
+      <div class="content-left" >
+        <ul class="category-list">
+          <li class="category-title">
+            <h4>General</h4>
+          </li>
+          <li class="category" onclick="openPage('color')">Color</li>
+          <li class="category" onclick="openPage('typography')">TypoGraphy</li>
+          <li class="category" onclick="openPage('pagelayout')">Page Layout</li>
+          <li class="category" onclick="openPage('dataVisualization')">
+            Data Visualization
+          </li>
+          <li class="category-title">
+            <h4>Elements</h4>
+          </li>
+          <li class="category" onclick="openPage('button')">Buttons</li>
+          <li class="category" onclick="openPage('link')">Links</li>
+          <li class="category" onclick="openPage('header')">Header</li>
+          <li class="category" onclick="openPage('notifications')">
+            Notification
+          </li>
+          <li class="category" onclick="openPage('navigation')">Navigation</li>
+          <li class="category" onclick="openPage('select')">Select</li>
+        </ul>
+      </div>
     </div>
 
     <!-- Content -->

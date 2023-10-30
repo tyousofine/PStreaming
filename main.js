@@ -21,6 +21,29 @@ function openPage(id) {
     return;
 }
 
+// hamburger menu
+function toggleHamburgerFunction() {
+    const hamburger = document.querySelector(".hamburger");
+    const navbar = document.querySelector(".content-left")
+
+    if (!hamburger.classList.contains('active')) {
+        hamburger.classList.add('active')
+        navbar.classList.add('nav-hamburger');
+        console.log('Hamburger class: ', hamburger.classList)
+        console.log('navbar class: ', navbar.classList)
+    }
+
+    else {
+        hamburger.classList.remove('active')
+        navbar.classList.remove('nav-hamburger')
+        console.log('Hamburger class: ', hamburger.classList)
+        console.log('navbar class: ', navbar.classList)
+
+    }
+
+}
+
+
 
 
 

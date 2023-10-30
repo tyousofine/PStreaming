@@ -84,11 +84,12 @@
 
     <!-- Content -->
     <div class="content-right">
-  
     <!-- Color Start -->
-  <div id="color" class="contentContainer active">
+    <div id="color" class="contentContainer active">
             <h1 class="contentTitle">colors</h2>
             <!-- Please write your code below this line -->
+
+            <p class="page-description">This section lists the colors that are used in the dashboard</p>
             <h3>Brand color</h3>
             <span class="colorCircle orange">
               <p>
@@ -129,10 +130,10 @@
                   #C0C0C0
                 </p>
               </span>
-              <span class="colorCircle gold">
+              <span class="colorCircle orange">
                 <p>
-                  Harvest Gold <br />
-                  #DA9100
+                  Brand Orange<br />
+                  #FF7119
                 </p>
               </span>
               <span class="colorCircle brass">
@@ -161,7 +162,7 @@
             </div>
          
   
-          <h3>Chart Data colors</h3>
+          <h3>Additional Colors - Data Charts</h3>
           <div class="funcColorContainer">
             <span class="colorCircle maroon">
               <p>
@@ -192,29 +193,6 @@
               <p>
                 Lavender<br />
                 #9B7CB6
-              </p>
-            </span>
-          </div>
-
-
-          <h3>Feedback colors</h3>
-          <div class="noteColorContainer">
-            <span class="colorCircle softOrange">
-              <p>
-                Soft Orange <br />
-                #F0944D
-              </p>
-            </span>
-            <span class="colorCircle pastelGreen">
-              <p>
-                Pastel Green <br />
-                #C8E1CC
-              </p>
-            </span>
-            <span class="colorCircle pastelYellow">
-              <p>
-                Pastel Yellow <br />
-                #fBEECA
               </p>
             </span>
           </div>
@@ -414,6 +392,16 @@
          <p class="paragraph">The dashboard will utilize Scatter plot to illustrate general trends or relationship between variables. </p>
          <img src="images/likesToSub.png" alt="scatter plot chart image" class="barChart-image">
 
+         <h2>Circular Charts</h2>
+         <p>The dashboard will utilize Pie Chart and Donut chart to represent visualized representation of data for distribution of total amount of a category between multiple variables. </p>
+          <h3>Pie Charts</h3>
+         <p class="paragraph">The pie chart will be utilized to visualize percentage or amount distribution of a category. </p>
+         <img src="images/piechart.png" alt="pie chart image" class="barChart-image">
+
+         <h3>Donut Charts</h3>
+         <p class="paragraph">The Donut Chart is same as pie chart, but with a slightly different visual style.</p>
+         <img src="images/donutChart.png" alt="donut chart image" class="barChart-image">
+
          <h2>Single Value Charts</h2>
          <p class="paragraph">The dashboard will utilize single value charts to provide a quick glance reference to a key value.</p>
          <div class="singleChart-container">
@@ -479,7 +467,8 @@
   <div id="select" class="contentContainer">
     <h1 class="contentTitle">Select Dropdown</h1>
     <div class="select-page">
-      <p class="paragraph">The Dashboard will utilize select element for user input. The element is used to create a drop-down list for user to choose from. 
+      <p class="page-description">This section describes the usage of select boxes for user input prompts in the dashboard.</p>
+      <p class="paragraph">The Dashboard will utilize select element for user input.
       <br>
       The select drop down will have a title to provide instruction for choosing an option in subject category. <br>
     The select box size will be based on the values provided in the dropdown.</p>
@@ -495,6 +484,7 @@
             <option value="option6">op6</option>
           </select>
         </div>
+      
         <div class="select">
           <h5>Select Category:</h5>
           <select name="select" id="select" class="select-dropdown">

@@ -508,15 +508,14 @@
 
   /* select drop down  */
   .select-page {
-    margin-top: 3%;
+  
   }
 
   .select-container {
     display: flex;
     align-items: center;
     gap: 5%;
-    padding: 2%;
-
+    padding: 0 2%;
     flex-wrap: wrap;
   }
 
@@ -530,11 +529,12 @@
 
   .select{
      background-color: var(--bg-main);
-     height: 500px;
+     height: 300px;
      width: 150px;
      padding: 2%;
      box-shadow: -1px 0px 10px 7px rgba(74,76,76,0.54);
      margin: 2%;
+     margin-top: 3%;
   }
 
   .select h5 {
@@ -647,8 +647,6 @@
       width: 80px;
     }
     
- 
-
     /* additional code for table view */
   }
 

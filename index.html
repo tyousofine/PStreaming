@@ -485,32 +485,47 @@
         </div>
     <!-- header end -->
 
-      <!--Notification badge-->
-      <div class="contentContainer" id="notifications">
+       <!--Notification badge-->
+       <div class="contentContainer" id="notifications">
         <h2 class="contentTitle">Notification</h2>
         <!-- Please write your code below this line -->
-        <div>
-          <a></a>
-          <a></a>
+
+        <div class="noti-container">
+          <p class="paragraph" style="margin-bottom: 1%;">Move the mouse over a button inside to read the notifications:</p>
+          <div class="notifications">
+            <button class="notiLinks" onmouseover="openNoti(event, 'News')">News</button>
+            <button class="notiLinks" onmouseover="openNoti(event, 'Messages')">Messages</button>
+            <button class="notiLinks" onmouseover="openNoti(event, 'Emails')">Emails<i
+                class="fa fa-fw fa-envelope"></i></button>
+          </div>
+          <div id="News" class="notiType">
+            <h3>News 1</h3>
+            <p>Alex has changed the icon.</p>
+            <h3>News 2</h3>
+            <p>Lee changed the theme color.</p>
+          </div>
+          <div id="Messages" class="notiType">
+            <h3>Messages 1</h3>
+            <p>The brand guideline 2.0 is updated.</p>
+            <h3>Messages 2</h3>
+            <p>The color need to add more to the palette.</p>
+          </div>
+          <div id="Emails" class="notiType">
+            <h3>Emails</h3>
+            <p>You got 3 new emails.</p>
+          </div>
+          <div class="clearfix"></div>
+          <div class="notiExplain">
+            <h3>Notification Layout</h3>
+            <img src="images/notiLayout.png">
+          </div>
         </div>
-          <a href="#" class="notiButtons">
-            <span>Inbox</span>
-            <span class="badge">3</span>
-          </a>
-          <a href="#" class="notiButtons">
-            <span>Messages</span>
-            <span class="badge">5</span>
-          </a>
+      
       </div>
 
-      <!-- Notifications End -->
+  <!-- notification end -->
 
-      <!--table Start-->
-      <div id="navigation" class="contentContainer">
-        <h1 class="contentTitle">navigation</h1>
-        <!-- Please write your code below this line -->
-      </div>
-      <!--table end-->
+  
 
   <!-- Select Start -->
   <div id="select" class="contentContainer">

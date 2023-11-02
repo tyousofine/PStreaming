@@ -43,6 +43,21 @@ function toggleHamburgerFunction() {
 
 }
 
+// make the notification interactive when hovering
+function openNoti(evt, notiKind) {
+    var i, notiType, notiLinks;
+    notiType = document.getElementsByClassName("notiType");
+    for (i = 0; i < notiType.length; i++) {
+        notiType[i].style.display = "none";
+    }
+    notiLinks = document.getElementsByClassName("notiLinks");
+    for (i = 0; i < notiLinks.length; i++) {
+        notiLinks[i].className = notiLinks[i].className.replace(" active", "");
+    }
+    document.getElementById(notiKind).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
 
 
 

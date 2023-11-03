@@ -506,65 +506,59 @@
     box-shadow: -1px 0px 10px 7px rgba(74,76,76,0.54);
   }
 
-  /* select drop down  */
-  .select-container {
-    display: flex;
-    align-items: center;
-    gap: 5%;
-    padding: 0 2%;
-    flex-wrap: wrap;
+  /* buttons section */
+
+  .buttons {
+    border-radius: 4px;
+    border: none;
+    text-align: center;
+    font-family: Montserrat;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 8px;
+  }
+  
+  .buttons span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .buttons span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .buttons:hover span {
+    padding-right: 25px;
+  }
+  
+  .buttons:hover span:after {
+    opacity: 1;
+    right: 0;
   }
 
-  .select-container img {
-    height: 50%;
-    width: auto;
-    margin: 2%;
-    max-width: 30vw;
-    box-shadow: -1px 0px 10px 7px rgba(74,76,76,0.54);
-  }
-
-  .select{
-     background-color: var(--bg-main);
-     height: 300px;
-     width: 150px;
-     padding: 2%;
-     box-shadow: -1px 0px 10px 7px rgba(74,76,76,0.54);
-     margin: 2%;
-     margin-top: 3%;
-  }
-
-  .select h5 {
-    font-family: var(--font-family-content);
-    /* font-weight: normal; */
-    padding-bottom: 5px;
-    color: var(--font-on-dark);
-    
-  }
-
-  .select-dropdown {
-    font-family: var(--font-family-content);
-    height: 1.6rem;
-    background-color: var(--font-on-dark);
-    width: auto;
-    outline: none;
-    padding: 0 1px;
-  }
-
+  
   
   /* Notification section */
   
   .not-container {
     padding: 0 2%;
-}
+  }
 
-
-.notifications {
-  float: left;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
-  width: 30%;
-  height: 300px;
-}
+  
+  .notifications {
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 30%;
+    height: 300px;
+  }
 
 /* Style the buttons inside the tab */
 .notifications button {
@@ -625,6 +619,49 @@
 
 .contentContainer .navagator:hover {
   color: #007bff; /* Change text color on hover */
+}
+/* select drop down  */
+.select-container {
+  display: flex;
+  align-items: center;
+  gap: 5%;
+  padding: 0 2%;
+  flex-wrap: wrap;
+}
+
+.select-container img {
+  height: 50%;
+  width: auto;
+  margin: 2%;
+  max-width: 30vw;
+  box-shadow: -1px 0px 10px 7px rgba(74,76,76,0.54);
+}
+
+.select{
+   background-color: var(--bg-main);
+   height: 300px;
+   width: 150px;
+   padding: 2%;
+   box-shadow: -1px 0px 10px 7px rgba(74,76,76,0.54);
+   margin: 2%;
+   margin-top: 3%;
+}
+
+.select h5 {
+  font-family: var(--font-family-content);
+  /* font-weight: normal; */
+  padding-bottom: 5px;
+  color: var(--font-on-dark);
+  
+}
+
+.select-dropdown {
+  font-family: var(--font-family-content);
+  height: 1.6rem;
+  background-color: var(--font-on-dark);
+  width: auto;
+  outline: none;
+  padding: 0 1px;
 }
 
 /* MOBILE VIEW */

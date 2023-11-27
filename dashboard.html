@@ -22,6 +22,10 @@
       rel="stylesheet"
     />
 
+    <!-- Script import -->
+    <script src="index.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
+
     <!-- stylesheets -->
     <link rel="stylesheet" href="dashboardStyles.css" />
     <title>Plug Streaming Dashboard</title>
@@ -49,97 +53,30 @@
     <section class="main">
       <div class="navbar-left">
         <ul class="">
-          <li class="categoryTitle">Stat Highlights</li>
-          <li><a href="">Dashboard</a></li>
-          <li><a href="">Countries</a></li>
-          <li><a href="">Youtubers</a></li>
-          <li class="categoryTitle">Stat Relationships</li>
-          <li><a href="">Likes</a></li>
-          <li><a href="">Shares</a></li>
-          <li><a href="">Comments</a></li>
+          <li class="categoryTitle">Statistics</li>
+          <li><a href="">General Statistics</a></li>
+          <li><a href="">Top 5 Channels</a></li>
+          <li class="categoryTitle">Plug info</li>
+          <li><a href="">Contact</a></li>
+          <li><a href="">About Us</a></li>
         </ul>
       </div>
 
       <main class="main-content">
-        <h1>DASHBOARD CONTENT COMING SOON!</h1>
         <div class="charts-container">
           <div class="chart">
-            <div class="chart1">Propotion of Youtubers in each Country</div>
-            <img src="images/piechart.png" width="400px" alt="" />
-          </div>
-          <div class="chart">
-            <div class="chart1">Top 5 youtubers</div>
-            <img src="images/lineChart.png" width="400px" alt="" />
-          </div>
-          <div class="chart">
-            <div class="chart2">Likes to Sub</div>
-            <img src="images/likesToSub.png" width="400px" alt="" />
-          </div>
-          <div class="chart">
-            <div class="chart1">Propotion of Youtubers in each Country</div>
-            <img src="images/piechart.png" width="400px" alt="" />
+            <div class="singleValueCharts">
+              <div class="svChart1"></div>
+              <div class="svChart2"></div>
+              <div class="svChart3"></div>
+            </div>
+            <div id="chart1"></div>
+            <div id="chart2"></div>
           </div>
         </div>
       </main>
     </section>
-    <script>
-      // Create an SVG element
-      // var purpleSet = d3
-      //   .selectAll(".chart1")
-      //   .append("svg")
-      //   .attr("width", 200)
-      //   .attr("height", 200);
 
-      // // Append a circle to the SVG element
-      // purpleSet
-      //   .append("circle")
-      //   .attr("cx", 100)
-      //   .attr("cy", 100)
-      //   .attr("r", 50)
-      //   .style("fill", "purple");
-
-      // purpleSet
-      //   .append("circle")
-      //   .attr("cx", 50)
-      //   .attr("cy", 50)
-      //   .attr("r", 25)
-      //   .style("fill", "blue");
-
-      // purpleSet
-      //   .append("rect")
-      //   .attr("x", 120)
-      //   .attr("y", 100)
-      //   .attr("width", 50)
-      //   .attr("height", 50)
-      //   .style("fill", "maroon");
-
-      // var goldSet = d3
-      //   .selectAll(".chart2")
-      //   .append("svg")
-      //   .attr("width", 200)
-      //   .attr("height", 200);
-
-      // goldSet
-      //   .append("circle")
-      //   .attr("cx", 100)
-      //   .attr("cy", 100)
-      //   .attr("r", 50)
-      //   .style("fill", "#c0c0c0");
-
-      // goldSet
-      //   .append("circle")
-      //   .attr("cx", 50)
-      //   .attr("cy", 50)
-      //   .attr("r", 25)
-      //   .style("fill", "#da9100");
-
-      // goldSet
-      //   .append("rect")
-      //   .attr("x", 120)
-      //   .attr("y", 100)
-      //   .attr("width", 50)
-      //   .attr("height", 50)
-      //   .style("fill", "#FF7119");
-    </script>
+    <script></script>
   </body>
 </html>

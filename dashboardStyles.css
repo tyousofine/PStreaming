@@ -54,7 +54,6 @@ body {
 }
 
 .main-nav {
-
   background-color: var(--bg-sides);
   display: flex;
   gap: 1rem;
@@ -112,14 +111,16 @@ body {
 }
 
 .navbar-left {
+
   width: 20%;
+  max-width: 250px;
   min-width: 150px;
   background-color: var(--bg-sides);
   height: 100%;
   min-height: 100%;
-  text-align: left;
   padding: 0 3%;
-
+  
+  text-align: left;
  
 }
 .navbar-left ul li {
@@ -127,7 +128,7 @@ body {
   font-family: var(--font-family-headers);
   font-size: 0.8rem;
   list-style: none;
-  list-style: none;
+  text-wrap: nowrap;
 }
 
 .navbar-left li a {
@@ -150,12 +151,12 @@ body {
 }
 
 .main-content {
-  width: 80%;
-  padding: 0 2%;
+  width: 100%;
+  padding: 2%;
   background-color: var(--bg-main);
   height: 100%;
   min-height: 100%;
-  overflow: scroll;
+  overflow: auto;
 
 }
 
@@ -173,13 +174,7 @@ body {
 
 }
 
-.chart img {
-  max-width: 600px;
-  height: auto;
-  box-shadow: 0px 0px 10px 1px #c0c0c044;
-/* 
-  box-shadow: 0px 0px 10px 5px #12121244; */
-}
+
 
 @media only screen and (max-width: 800px) {
   .main-content .charts-container  {
@@ -188,9 +183,7 @@ body {
 
   }
 
-  .charts img {
-    max-width: 300px;
-  }
+
 
   .navbar-left {
     display: none;

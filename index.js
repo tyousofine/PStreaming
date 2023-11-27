@@ -180,7 +180,7 @@ d3.csv("./data/top_100_youtubers.csv").then(function (data) {
         .attr("x", -150)
         .attr("y", -40)
         .attr("fill", "#fff")
-        .text("Rating")
+        .text("Percentage")
         .style("font-family", "noto")
         .style("font-size", 13)
         .style("letter-spacing", 2);

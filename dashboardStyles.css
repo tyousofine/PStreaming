@@ -168,15 +168,17 @@ body {
   padding: 2%;
 }
 
-.chart {
 
-}
+
 
 .charts-container {
   display: grid;
-  grid-template-columns: 0.5fr 2fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 50%;
   grid-gap: 10px
+
+
+
 
 }
 

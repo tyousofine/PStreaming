@@ -490,7 +490,7 @@ d3.csv('./data/top_100_youtubers.csv').then(function (data) {
             return i * 100
         })
 
-    // 15. Add transition to change opacity of your label
+    // transition to make labels phase in
     g.selectAll('.number')
         .transition()
         .duration(800)

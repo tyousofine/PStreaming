@@ -260,7 +260,6 @@ d3.csv("./data/top_100_youtubers.csv").then(function (data) {
     const xaxis = d3.axisBottom().scale(xscale);
     const yaxis = d3.axisLeft().scale(yscale);
 
-
     const createXaxis = spG
         .append("g")
         .call(xaxis.tickFormat((d) => d / 1000000 + "m").tickSize(-scatterPlotInnerHeight + 40))
@@ -356,8 +355,10 @@ d3.csv("./data/top_100_youtubers.csv").then(function (data) {
 // CHART 3 - Each Countries number of youtubers
 //****************************************************** */
 
-let svgChart3 = d3
-    .select("#chart2")
+
+
+// Create SVG element
+var svg = d3.select('#chart3')
     .append("svg")
     .attr("width", "100%")
     .attr("height", "100%")
@@ -367,26 +368,137 @@ let svgChart3 = d3
     .style("box-shadow", "0 0 15px 2px #c0c0c055")
     .style("border-radius", "4px")
 
+// add paddings in svg
+var innerWidth = width - padding; // 400
+var innerHeight = height - padding; // 300
 
-let barChartG = svgChart3
-    .append("g")
-    .attr("class", "group")
-    .attr("transform", "translate(65, 10)")
 
-// add scatterplot title 
-spG
+// Add Title
+svg
     .append("text")
     .attr("text-anchor", "center")
-    .attr("x", bInner_width / 8)
-    .attr("y", 0)
-    .text("Relationship Between Likes and Subs")
+    .attr("x", innerWidth / 3.5)
+    .attr("y", 15)
+    .text("Number Youtubers in Each Country")
     .style("fill", "#fff")
     .style("font-size", 17)
     .style("letter-spacing", 0.8)
 
 
+// Create the first group to add the chart
+var g = svg.append('g')
+    .attr('transform', 'translate(60, 10)')
+    .attr('class', 'graph')
+
+// 7. Get the data from the csv file
+d3.csv('./data/top_100_youtubers.csv').then(function (data) {
+
+    // color set for bars
+    var color = d3.scaleOrdinal()
+        .domain(data)
+        .range(['maroon', 'blue', 'purple',])
 
 
+    // Find number of youtubers in each country
+    const countryCount = [];
+    data.forEach((obj) => {
+        const country = obj['Country'];
+        if (country) {
+            countryCount[country] = (countryCount[country] || 0) + 1;
+        }
+    });
+
+    // create new data object
+    data = Object.entries(countryCount).map(([country, count]) => ({
+        country: country,
+        count: count,
+    }));
+
+    // chart scales
+    var xScale = d3.scaleBand()
+        .range([0, innerWidth - 30])
+        .paddingInner(0.2)
+        .paddingOuter(0.5)
+        .domain(data.map(d => d.country))
+
+    var yScale = d3.scaleLinear()
+        .range([innerHeight, 40])
+        .domain([0, d3.max(data, d => parseInt(d.count))])
+
+
+    // create xAxis
+    var xAxis = d3.axisBottom()
+        .scale(xScale)
+    // create yAxis 
+    var yAxis = d3.axisLeft()
+        .scale(yScale)
+
+    // append the xAxis
+    g.append('g')
+        .attr('transform', 'translate(0, ' + innerHeight + ')')
+        .call(xAxis.tickSize(12))
+        .attr("style", "color: #c0c0c0")
+        .attr("font-family", "noto")
+
+
+    // append the yAxis
+    g.append('g')
+        .call(yAxis)
+        .style("color", "#c0c0c0")
+
+
+
+    // create g for data bars
+    var graph = g.selectAll('.graph')
+        .data(data)
+        .enter()
+        .append('g')
+
+    // append the bars
+    graph.append('rect')
+        .attr('class', 'bar')
+        .attr('x', d => xScale(d.country))
+        .attr('y', d => yScale(0))
+        .attr('width', xScale.bandwidth())
+        .attr('height', d =>
+            innerHeight - yScale(0))
+        .attr("fill", d => color(d.country))
+
+    //  add text number to bars
+    graph.append('text')
+        .attr('class', 'number')
+        .attr("text-anchor", "start")
+        .attr('x', function (d) { return xScale(d.country) })
+        .attr('y', function (d) { return yScale(+d.count) })
+        .attr('dx', '.25em')
+        .attr('dy', d => d.count - 10)
+        .text(function (d) {
+            return d.count
+        })
+        .attr('fill', '#c0c0c0')
+        .style('opacity', 0)
+
+    // transition for the chart
+    svg.selectAll('rect')
+        .transition()
+        .duration(800)
+        .attr('y', d =>
+            yScale(parseInt(d.count)))
+
+        .attr('height', d => innerHeight - yScale(parseInt(d.count)))
+        .delay(function (d, i) {
+            return i * 100
+        })
+
+    // 15. Add transition to change opacity of your label
+    g.selectAll('.number')
+        .transition()
+        .duration(800)
+        .style('opacity', 1)
+        .delay(function (d, i) {
+            return i;
+        })
+})
 
 
 

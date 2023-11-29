@@ -1,6 +1,10 @@
 
-let svgChart3 = d3
-    .select("#chart3")
+//***************************************************** */
+// CHART 4 - Top 5 channels' annual average view comparison
+//****************************************************** */
+
+
+var svgCh4 = d3.select('#chart4')
     .append("svg")
     .attr("width", "100%")
     .attr("height", "100%")
@@ -10,121 +14,158 @@ let svgChart3 = d3
     .style("box-shadow", "0 0 15px 2px #c0c0c055")
     .style("border-radius", "4px")
 
+// add paddings in svg
+var innerWidth = width - padding;
+var innerHeight = height - padding;
 
-let barChartG = svgChart3
-    .append("g")
-    .attr("class", "group")
-    .attr("transform", "translate(50, 10)")
 
-// add chart title 
-
-barChartG
+// Add Title
+svgCh4
     .append("text")
     .attr("text-anchor", "center")
-    .attr("x", bInner_width / 8)
-    .attr("y", 0)
-    .text("Number of Youtubers in Each Country")
+    .attr("x", innerWidth / 3.5)
+    .attr("y", 15)
+    .text("Top 5 Channels' Annual Average View")
     .style("fill", "#fff")
     .style("font-size", 17)
     .style("letter-spacing", 0.8)
 
-d3.csv("./data/top_100_youtubers.csv").then(function (data) {
 
-    // Find number of youtubers in each country
-    const countryCount = [];
-    data.forEach((obj) => {
-        const country = obj['Country'];
-        if (country) {
-            countryCount[country] = (countryCount[country] || 0) + 1;
-        }
-    });
+// Create the first group to add the chart
+var lcG = svgCh4.append('g')
+    .attr('transform', 'translate(50, 0)')
+    .attr('class', 'graph')
 
-    data = Object.entries(countryCount).map(([country, count]) => ({
-        country: country,
-        count: count,
-    }));
+// Read data
+d3.csv("data/avg_view_every_year.csv").then((data) => {
 
-    console.log(data)
+    // Extract the list of subjects from the data
+    var subjects = data.columns.slice(1);
 
-    // color set for circles
+    // color set for lines
     var color = d3.scaleOrdinal()
         .domain(data)
-        .range(['blue', 'purple', 'maroon', '#FF7119'])
+        .range(['maroon', 'blue', 'purple', '#D4Af37', '#FF7119'])
 
-    // Creating scales
-    const xscale = d3
-        .scaleBand()
-        .range([0, scatterPlotInnerWidth - 20])
-        .domain(data.map((d) => d.country))
-
-    const yscale = d3
+    // Add X scale
+    var lcxScale = d3
         .scaleLinear()
-        .range([scatterPlotInnerHeight, 40])
-        .domain([0, d3.max(data, (d) => d.count)]);
+        .domain(
+            d3.extent(data, function (d) {
+                console.log(d.Year)
+                return +d.Year
+            })
+        )
+        .range([0, innerWidth]);
 
-    // Creating axis'
-    const xaxis = d3.axisBottom().scale(xscale);
-    const yaxis = d3.axisLeft().scale(yscale);
+    // create xAxis
+    var lcxAxis = d3.axisBottom().scale(lcxScale)
 
+    // add xAxis
+    lcG.append("g")
+        .attr("transform", `translate(0, ${innerHeight})`)
+        .call(lcxAxis.tickFormat(d3.format("d")).ticks(6))
+        .attr("color", "#c0c0c0");
 
-    const createXaxis = barChartG
-        .append("g")
-        .call(xaxis)
-        .attr("transform", `translate(0, ${scatterPlotInnerHeight})`)
-        .attr("color", "#c0c0c0")
-        .attr("style", "font-family: noto")
+    // create y scale
+    var lcyScale = d3
+        .scaleLinear()
+        .domain([
+            0,
+            d3.max(data, d => {
+                return +d3.max(subjects, function (subject) {
+                    return +d[subject];
+                });
+            }),
+        ])
+        .range([innerHeight, 40]);
 
-    // create y axis    
-    const createYaxis = barChartG
-        .append("g")
-        .call(yaxis)
-        .attr("color", "#c0c0c0")
-        .attr("style", "font-family: noto")
+    // append yscale
+    lcG.append("g")
+        .call(d3.axisLeft(lcyScale)
+            .tickFormat((d) => d / 1000000 + "m")
+            .tickSize(5)).attr("color", "#c0c0c0");
 
+    // Create background box for click on everywhere else to reset all lines
+    lcG.append("g")
+        .append("rect")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("opacity", 0)
+        .on("click", function (e) {
 
-    // // 11. Binding data with g element
-    var graph = barChartG.selectAll('.graph')
-        .data(data)
+            line.attr("opacity", 1);
+        });
+
+    // Add a line for each subject
+    var line = lcG
+        .selectAll(".line")
+        .data(subjects)
         .enter()
-        .append('g')
+        .append("path")
+        .attr("class", function (d) {
+            return d;
+        })
+        .attr("fill", "none")
+        .attr("opacity", 1)
+        .attr("d", function (subject) {
+            return d3
+                .line()
+                .x(function (d) {
+                    return lcxScale(d.Year);
+                })
+                .y(function (d) {
+                    return lcyScale(+d[subject]);
+                })(data);
+        })
+        .style("stroke", function (s) {
+            return color([subjects.indexOf(s)]);
+        })
+        .attr("stroke-width", 3)
 
-    // 12. Append the rectangles
-    graph.append('rect')
-        .attr('x', (d) => { return xscale(d.country) })
-        .attr('y', (d) => scatterPlotInnerHeight - d.count)
-        .attr('width', xscale.bandwidth())
-        .attr('height', (d) => d.count * 20)
+    // Add legend group
+    var legend = lcG
+        .selectAll(".legend")
+        .data(subjects)
+        .enter()
+        .append("g")
+        .attr("class", "legend")
+        .attr("transform", function (subjects, i) {
+            return `translate(${i * 80}, ${0})`;
+        });
 
+    // add legend color box to legend group
+    legend
+        .append("rect")
+        .attr("x", 20)
+        .attr("y", height - 40)
+        .attr("width", 35)
+        .attr("height", 15)
+        .attr("name", function (d) {
+            return d;
+        })
+        .style("fill", function (subject) {
+            return color([subjects.indexOf(subject)]);
+        })
+        .on("click", function (event, d) {
+            console.log(event, d)
+            line.attr("opacity", 0);
+            d3.select("." + d).attr("opacity", 1);
+        });
 
+    //add legend text to legend group
+    legend
+        .append("text")
+        .attr("x", 15)
+        .attr("y", height - 50)
+        .attr("dy", "0.2rem")
+        .style("text-anchor", "start")
+        .style("font-size", 13)
+        .style("fill", "#c0c0c0")
+        .style("font-family", "noto")
+        .text(function (d) {
 
-
-    // // 14. Add transition for the chart
-    // barChartG.selectAll('rect')
-    //     .transition()
-    //     .duration(800)
-    //     .attr('y', function (d) {
-    //         return yscale(parseInt(d.grade))
-    //     })
-    //     .attr('height', function (d) {
-    //         return innerHeight - yscale(parseInt(d.grade))
-    //     })
-    //     .delay(function (d, i) {
-    //         return i * 100
-    //     })
-
-    // // 15. Add transition to change opacity of your label
-    // g.selectAll('.dataLabel')
-    //     .transition()
-    //     .duration(800)
-    //     .style('opacity', 1)
-    //     .delay(function (d, i) {
-    //         return i;
-    //     })
-
+            return d;
+        })
 
 })
-
-
-
-
-

@@ -355,8 +355,6 @@ d3.csv("./data/top_100_youtubers.csv").then(function (data) {
 // CHART 3 - Each Countries number of youtubers
 //****************************************************** */
 
-
-
 // Create SVG element
 var svg = d3.select('#chart3')
     .append("svg")
@@ -369,8 +367,8 @@ var svg = d3.select('#chart3')
     .style("border-radius", "4px")
 
 // add paddings in svg
-var innerWidth = width - padding; // 400
-var innerHeight = height - padding; // 300
+var innerWidth = width - padding;
+var innerHeight = height - padding;
 
 
 // Add Title
@@ -499,6 +497,218 @@ d3.csv('./data/top_100_youtubers.csv').then(function (data) {
             return i;
         })
 })
+
+
+//***************************************************** */
+// CHART 4 - Top 5 channels' annual average view comparison
+//****************************************************** */
+
+
+var svgCh4 = d3.select('#chart4')
+    .append("svg")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr('preserveAspectRatio', 'xMinYMin meet')
+    .attr('viewBox', '0 -20 500 400')
+    .attr("style", "background-color: #2c2b2b")
+    .style("box-shadow", "0 0 15px 2px #c0c0c055")
+    .style("border-radius", "4px")
+
+// add paddings in svg
+var innerWidth = width - padding;
+var innerHeight = height - padding;
+
+
+// Add Title
+svgCh4
+    .append("text")
+    .attr("text-anchor", "center")
+    .attr("x", innerWidth / 3.5)
+    .attr("y", 15)
+    .text("Top 5 Channels' Annual Average View")
+    .style("fill", "#fff")
+    .style("font-size", 17)
+    .style("letter-spacing", 0.8)
+
+
+// Create the first group to add the chart
+var lcG = svgCh4.append('g')
+    .attr('transform', 'translate(50, 0)')
+
+
+// Read data
+d3.csv("data/avg_view_every_year.csv").then((data) => {
+
+    // Extract the list of subjects from the data
+    var channelNames = data.columns.slice(1);
+
+    // color set for lines
+    var color = d3.scaleOrdinal()
+        .domain(data)
+        .range(['maroon', 'blue', 'purple', '#D4Af37', '#FF7119'])
+
+    // Add X scale
+    var lcxScale = d3
+        .scaleLinear()
+        .domain(
+            d3.extent(data, function (d) {
+                console.log(d.Year)
+                return +d.Year
+            })
+        )
+        .range([0, innerWidth]);
+
+    // create xAxis
+    var lcxAxis = d3.axisBottom().scale(lcxScale)
+
+    // add xAxis
+    lcG.append("g")
+        .attr("transform", `translate(0, ${innerHeight})`)
+        .call(lcxAxis.tickFormat(d3.format("d")).ticks(6))
+        .attr("color", "#c0c0c0");
+
+    // create y scale
+    var lcyScale = d3
+        .scaleLinear()
+        .domain([
+            0,
+            d3.max(data, d => {
+                return +d3.max(channelNames, function (channel) {
+                    return +d[channel];
+                });
+            }),
+        ])
+        .range([innerHeight, 40]);
+
+    // append yscale
+    lcG.append("g")
+        .call(d3.axisLeft(lcyScale)
+            .tickFormat((d) => d / 1000000 + "m")
+            .tickSize(5)).attr("color", "#c0c0c0");
+
+    // Create background box for click on everywhere else to reset all lines
+    lcG.append("g")
+        .append("rect")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("opacity", 0)
+        .on("click", function (e) {
+            d3.selectAll('.line').attr("opacity", 1)
+        });
+
+
+    // add lines to channel names
+    channelNames.forEach((channel) => {
+        lcG
+            .append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("class", `line ${channel}`)
+            .attr("stroke", color(channel))
+            .attr("opacity", 1)
+            .attr("stroke-width", 3)
+            .attr(
+                "d",
+                d3.line().x((d) => lcxScale(d.Year)).y((d) => lcyScale(d[channel]))
+            );
+
+        const circle = lcG.append("g")
+            .selectAll("circle")
+            .data(data)
+            .enter()
+            .append("g")
+            .append("circle")
+            .attr("class", `line ${channel}`)
+            .attr("opacity", 1)
+            .attr("cx", (d) => lcxScale(d.Year))
+            .attr("cy", (d) => lcyScale(d[channel]))
+            .attr("r", 4)
+            .attr("fill", color(channel))
+            .attr("stroke", "none")
+            .on("mouseover", function () {
+                //show the value of the ID and Flight_Distance when the mouse is over the data point
+                d3.select(this)
+                    .transition()
+                    .duration(100)
+                    .attr("r", 8)
+
+                // Create a function to show the value of the data point on the top of the data point whenever the mouse is over the data point.
+                function showToolTip(d) {
+                    console.log('d: ', d)
+                    console.log(`${channel}, Views: ${d[channel]}`)
+                    return `${channel}, Views: ${d[channel]}`
+                }
+                //Show only the value of the data point when the mouse is over the data point
+                d3.select(this)
+                    .append("title")
+                    .text(showToolTip)
+                console.log("is this working?");
+            })
+
+            //when the mouse is out of the data point, the value will disappear
+            .on("mouseout", function () {
+                d3.select(this)
+                    .transition()
+                    .duration(1000)
+                    .attr("r", 5)
+                    .attr("fill", "#821214")
+                    .attr("opacity", ".5");
+            });
+
+    })
+
+
+
+
+
+    // Add legend group
+    var legend = lcG
+        .selectAll(".legend")
+        .data(channelNames)
+        .enter()
+        .append("g")
+        .attr("class", "legend")
+        .attr("transform", function (subjects, i) {
+            return `translate(${i * 80}, ${0})`;
+        });
+
+    // add legend color box to legend group
+    legend
+        .append("rect")
+        .attr("x", 20)
+        .attr("y", height - 40)
+        .attr("width", 35)
+        .attr("height", 15)
+        .attr("name", function (d) {
+            return d;
+        })
+        .style("fill", function (channel) {
+            return color([channelNames.indexOf(channel)]);
+        })
+        .on("click", function (event, d) {
+            console.log(event, d)
+            d3.selectAll(".line").attr("opacity", 0)
+            d3.selectAll("." + d).attr("opacity", 1);
+        });
+
+    //add legend text to legend group
+    legend
+        .append("text")
+        .attr("x", 15)
+        .attr("y", height - 50)
+        .attr("dy", "0.2rem")
+        .style("text-anchor", "start")
+        .style("font-size", 13)
+        .style("fill", "#c0c0c0")
+        .style("font-family", "noto")
+        .text(function (d) {
+
+            return d;
+        })
+
+
+})
+
 
 
 

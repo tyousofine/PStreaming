@@ -748,7 +748,7 @@ d3.csv("data/top_100_youtubers.csv").then(function (data) {
     const xScale = d3
         .scaleLinear()
         .domain([0, d3.max(data, d => d3.max(quarterlyEarningsKey, key => +d[key]))])
-        .range([80, innerWidth]);
+        .range([80, innerWidth + 20]);
 
     // color scheme
     const color = d3

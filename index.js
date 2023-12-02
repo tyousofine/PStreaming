@@ -321,13 +321,13 @@ d3.csv("./data/top_100_youtubers.csv").then(function (data) {
     // add mouseover tool tip
     spG.selectAll("circle")
         .on("mouseover", function () {
-            //show the value of the ID and Flight_Distance when the mouse is over the data point
+            //show the value
             d3.select(this)
                 .transition()
                 .duration(100)
                 .attr("r", 8)
 
-            // Create a function to show the value of the data point on the top of the data point whenever the mouse is over the data point.
+            // helperFunction
             function showToolTip(d) {
                 return d.ChannelName;
             }
@@ -343,7 +343,7 @@ d3.csv("./data/top_100_youtubers.csv").then(function (data) {
                 .transition()
                 .duration(1000)
                 .attr("r", 5)
-                .attr("fill", "#821214")
+                .attr("fill", "#fff")
                 .attr("opacity", ".5");
         });
 })
@@ -622,13 +622,13 @@ d3.csv("data/avg_view_every_year.csv").then((data) => {
             .attr("fill", color(channel))
             .attr("stroke", "none")
             .on("mouseover", function () {
-                //show the value of the ID and Flight_Distance when the mouse is over the data point
+                //show the value 
                 d3.select(this)
                     .transition()
                     .duration(100)
                     .attr("r", 8)
 
-                // Create a function to show the value of the data point on the top of the data point whenever the mouse is over the data point.
+                // helperFunction
                 function showToolTip(d) {
                     return `${channel}, Views: ${d[channel]}`
                 }
@@ -690,7 +690,6 @@ d3.csv("data/avg_view_every_year.csv").then((data) => {
         .style("fill", "#c0c0c0")
         .style("font-family", "noto")
         .text(function (d) {
-
             return d;
         })
 })
@@ -732,33 +731,89 @@ var hgcG = svgCh5.append('g')
     .attr('transform', 'translate(0, 0)')
 
 
+// read and apply data
 d3.csv("data/top_100_youtubers.csv").then(function (data) {
 
 
     const topFive = data.slice(0, 5);
     const quarterlyEarningsKey = data.columns.slice(19);
 
+    // create scales
     const yScale = d3
         .scaleBand()
         .domain(topFive.map(d => d.ChannelName))
-        .range([innerHeight, 0])
+        .range([innerHeight, 40])
         .padding([0.2]);
 
     const xScale = d3
         .scaleLinear()
         .domain([0, d3.max(data, d => d3.max(quarterlyEarningsKey, key => +d[key]))])
-        .range([padding, innerWidth]);
+        .range([80, innerWidth + 20]);
 
+    // color scheme
     const color = d3
         .scaleOrdinal()
         .domain(quarterlyEarningsKey)
         .range(['blue', 'purple', 'maroon', '#FF7119']);
 
-    hgcG.selectAll('g')
+    // create axis   
+    const xAxis = d3.axisBottom().scale(xScale)
+    const yAxis = d3.axisLeft().scale(yScale)
+
+    // append axis'
+    hgcG.append("g")
+        .attr("transform", `translate(0, ${innerHeight})`)
+        .call(xAxis.tickFormat((d) => d / 1000 + "k"))
+        .style("color", "#fff")
+        .style("font-family", "noto")
+
+
+    const yAxisGroup = hgcG.append("g")
+        .attr("transform", `translate(80, 0)`)
+        .call(yAxis)
+        .style("color", "#fff")
+        .style("font-family", "noto")
+
+
+    yAxisGroup.selectAll('text')
+        .call(wrap, 10)
+
+
+    // helper function for text wrap
+    function wrap(text, width) {
+        text.each(function () {
+            var text = d3.select(this),
+                words = text.text().split(/\s+/).reverse(),
+                word,
+                line = [],
+                lineNumber = 0,
+                lineHeight = 1.1, // ems
+                y = text.attr("y"),
+                dy = parseFloat(text.attr("dy")),
+                tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em")
+            while (word = words.pop()) {
+                line.push(word)
+                tspan.text(line.join(" "))
+                if (tspan.node().getComputedTextLength() > width) {
+                    line.pop()
+                    tspan.text(line.join(" "))
+                    line = [word]
+                    tspan = text.append("tspan").attr("x", -15).attr("y", y).text(word).attr("dy", `${++lineNumber * dy}em`).text(word)
+
+                }
+            }
+        })
+    }
+
+    // create and apply group for bars 
+    const barsGroup = hgcG.selectAll('.bars')
         .data(topFive)
         .enter()
         .append('g')
         .attr('transform', (d, i) => `translate(0, ${yScale(d.ChannelName)})`)
+
+    // apply bars to group
+    const bars = barsGroup
         .selectAll('rect')
         .data(function (d) {
             return quarterlyEarningsKey.map(function (key) {
@@ -770,80 +825,95 @@ d3.csv("data/top_100_youtubers.csv").then(function (data) {
         })
         .enter()
         .append('rect')
+        .attr("class", "theBar")
         .attr('x', xScale(0))
         .attr('y', (d, i) => i * 10)
         .attr('width', d => xScale(d.value) - xScale(0))
-        .attr('height', 12)
-        .attr('fill', d => color(d.quarter));
+        .attr('height', 10)
+        .attr('fill', d => color(d.quarter))
+        .on("mouseover", function (d, i) {
+            //show the value
+            console.log("its working", i.value)
+            // helperFunction
+            function showToolTip(d) {
+                return d.value;
+            }
+            //Show only the value of the data point when the mouse is over the data point
+            d3.select(this)
+                .append("title")
+                .text(showToolTip)
+        })
 
-    const xAxis = d3.axisBottom().scale(xScale);
-    hgcG.append("g").attr("transform", `translate(0, ${innerHeight})`).call(xAxis);
 
-    const yAxis = d3.axisLeft().scale(yScale);
-    hgcG.append("g").attr("transform", `translate(${padding}, 0)`).call(yAxis);
+    // Quarter 1 Legend
+    hgcG.append("rect")
+        .attr("x", 90)
+        .attr("y", innerHeight + 40)
+        .attr("width", 75)
+        .attr("height", 15)
+        .style("fill", "blue");
+
+    hgcG.append("text")
+        .attr("x", 120)
+        .attr("y", innerHeight + 35)
+        .attr("class", "legend")
+        .text("Q1")
+        .style("fill", "#c0c0c0")
+        .style("font-size", 12)
+
+    // Quarter 2 Legend
+    hgcG.append("rect")
+        .attr("x", 175)
+        .attr("y", innerHeight + 40)
+        .attr("width", 75)
+        .attr("height", 15)
+        .style("fill", "purple")
+
+
+    hgcG.append("text")
+        .attr("x", 205)
+        .attr("y", innerHeight + 35)
+        .attr("class", "legend")
+        .text("Q2")
+        .style("fill", "#c0c0c0")
+        .style("font-size", 12)
+
+
+    // Quarter 3 Legend
+    hgcG.append("rect")
+        .attr("x", 260)
+        .attr("y", innerHeight + 40)
+        .attr("width", 75)
+        .attr("height", 15)
+        .style("fill", "maroon");
+
+    hgcG.append("text")
+        .attr("x", 285)
+        .attr("y", innerHeight + 35)
+        .attr("class", "legend")
+        .text("Q3")
+        .style("fill", "#c0c0c0")
+        .style("font-size", 12)
+
+
+    // Quarter 4 Legend
+    hgcG.append("rect")
+        .attr("x", 345)
+        .attr("y", innerHeight + 40)
+        .attr("width", 75)
+        .attr("height", 15)
+        .style("fill", "#FF7119");
+
+    hgcG.append("text")
+        .attr("x", 370)
+        .attr("y", innerHeight + 35)
+        .attr("class", "legend")
+        .text("Q4")
+        .style("fill", "#c0c0c0")
+        .style("font-size", 12)
+
 
 });
-
-
-
-
-
-// Quarter 1 Legend
-// g.append("rect")
-//     .attr("x", 20)
-//     .attr("y", 235)
-//     .attr("width", 75)
-//     .attr("height", 15)
-//     .style("fill", "blue");
-
-// g.append("text")
-//     .attr("x", 30)
-//     .attr("y", 262)
-//     .attr("class", "legend")
-//     .text("Quarter 1");
-
-// // Quarter 2 Legend
-// g.append("rect")
-//     .attr("x", 105)
-//     .attr("y", 235)
-//     .attr("width", 75)
-//     .attr("height", 15)
-//     .style("fill", "purple");
-
-// g.append("text")
-//     .attr("x", 115)
-//     .attr("y", 262)
-//     .attr("class", "legend")
-//     .text("Quarter 2");
-
-// // Quarter 3 Legend
-// g.append("rect")
-//     .attr("x", 190)
-//     .attr("y", 235)
-//     .attr("width", 75)
-//     .attr("height", 15)
-//     .style("fill", "maroon");
-
-// g.append("text")
-//     .attr("x", 200)
-//     .attr("y", 262)
-//     .attr("class", "legend")
-//     .text("Quarter 3");
-
-// // Quarter 4 Legend
-// g.append("rect")
-//     .attr("x", 275)
-//     .attr("y", 235)
-//     .attr("width", 75)
-//     .attr("height", 15)
-//     .style("fill", "#FF7119");
-
-// g.append("text")
-//     .attr("x", 285)
-//     .attr("y", 262)
-//     .attr("class", "legend")
-//     .text("Quarter 4");
-
 
 //************************************************************* */
 // CHART 6 - pie chart

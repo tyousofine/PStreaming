@@ -174,7 +174,7 @@ body {
 .charts-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 50%;
+
   grid-gap: 10px
 
 

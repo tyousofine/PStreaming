@@ -329,15 +329,12 @@ d3.csv("./data/top_100_youtubers.csv").then(function (data) {
 
             // Create a function to show the value of the data point on the top of the data point whenever the mouse is over the data point.
             function showToolTip(d) {
-                console.log('d: ', d)
-                console.log(d.ChannelName)
                 return d.ChannelName;
             }
             //Show only the value of the data point when the mouse is over the data point
             d3.select(this)
                 .append("title")
                 .text(showToolTip)
-            console.log("is this working?");
         })
 
         //when the mouse is out of the data point, the value will disappear
@@ -552,7 +549,6 @@ d3.csv("data/avg_view_every_year.csv").then((data) => {
         .scaleLinear()
         .domain(
             d3.extent(data, function (d) {
-                console.log(d.Year)
                 return +d.Year
             })
         )
@@ -634,15 +630,12 @@ d3.csv("data/avg_view_every_year.csv").then((data) => {
 
                 // Create a function to show the value of the data point on the top of the data point whenever the mouse is over the data point.
                 function showToolTip(d) {
-                    console.log('d: ', d)
-                    console.log(`${channel}, Views: ${d[channel]}`)
                     return `${channel}, Views: ${d[channel]}`
                 }
                 //Show only the value of the data point when the mouse is over the data point
                 d3.select(this)
                     .append("title")
                     .text(showToolTip)
-                console.log("is this working?");
             })
 
             //when the mouse is out of the data point, the value will disappear
@@ -650,16 +643,12 @@ d3.csv("data/avg_view_every_year.csv").then((data) => {
                 d3.select(this)
                     .transition()
                     .duration(1000)
-                    .attr("r", 5)
-                    .attr("fill", "#821214")
-                    .attr("opacity", ".5");
+                    .attr("r", 4)
+                    .attr("fill", color(channel))
+
             });
 
     })
-
-
-
-
 
     // Add legend group
     var legend = lcG
@@ -686,7 +675,6 @@ d3.csv("data/avg_view_every_year.csv").then((data) => {
             return color([channelNames.indexOf(channel)]);
         })
         .on("click", function (event, d) {
-            console.log(event, d)
             d3.selectAll(".line").attr("opacity", 0)
             d3.selectAll("." + d).attr("opacity", 1);
         });
@@ -705,9 +693,179 @@ d3.csv("data/avg_view_every_year.csv").then((data) => {
 
             return d;
         })
+})
 
+
+//*************************************************************** */
+// CHART 5 - group bar horizontal
+//*************************************************************** */
+
+var svgCh5 = d3.select('#chart5')
+    .append("svg")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr('preserveAspectRatio', 'xMinYMin meet')
+    .attr('viewBox', '0 -20 500 400')
+    .attr("style", "background-color: #2c2b2b")
+    .style("box-shadow", "0 0 15px 2px #c0c0c055")
+    .style("border-radius", "4px")
+
+// add paddings in svg
+var innerWidth = width - padding;
+var innerHeight = height - padding;
+
+
+// Add Title
+svgCh5
+    .append("text")
+    .attr("text-anchor", "center")
+    .attr("x", innerWidth / 3.5)
+    .attr("y", 15)
+    .text("Top 5 Channels' Quarterly Income")
+    .style("fill", "#fff")
+    .style("font-size", 17)
+    .style("letter-spacing", 0.8)
+
+
+// Create the first group to add the chart
+var hgcG = svgCh5.append('g')
+    .attr('transform', 'translate(0, 0)')
+
+
+d3.csv("data/top_100_youtubers.csv").then(function (data) {
+
+
+    const topFive = data.slice(0, 5);
+    const quarterlyEarningsKey = data.columns.slice(19);
+
+    const yScale = d3
+        .scaleBand()
+        .domain(topFive.map(d => d.ChannelName))
+        .range([innerHeight, 0])
+        .padding([0.2]);
+
+    const xScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(data, d => d3.max(quarterlyEarningsKey, key => +d[key]))])
+        .range([padding, innerWidth]);
+
+    const color = d3
+        .scaleOrdinal()
+        .domain(quarterlyEarningsKey)
+        .range(['blue', 'purple', 'maroon', '#FF7119']);
+
+    hgcG.selectAll('g')
+        .data(topFive)
+        .enter()
+        .append('g')
+        .attr('transform', (d, i) => `translate(0, ${yScale(d.ChannelName)})`)
+        .selectAll('rect')
+        .data(function (d) {
+            return quarterlyEarningsKey.map(function (key) {
+                return {
+                    'quarter': key,
+                    'value': +d[key]
+                };
+            });
+        })
+        .enter()
+        .append('rect')
+        .attr('x', xScale(0))
+        .attr('y', (d, i) => i * 10)
+        .attr('width', d => xScale(d.value) - xScale(0))
+        .attr('height', 12)
+        .attr('fill', d => color(d.quarter));
+
+    const xAxis = d3.axisBottom().scale(xScale);
+    hgcG.append("g").attr("transform", `translate(0, ${innerHeight})`).call(xAxis);
+
+    const yAxis = d3.axisLeft().scale(yScale);
+    hgcG.append("g").attr("transform", `translate(${padding}, 0)`).call(yAxis);
+
+});
+
+
+
+
+
+// Quarter 1 Legend
+// g.append("rect")
+//     .attr("x", 20)
+//     .attr("y", 235)
+//     .attr("width", 75)
+//     .attr("height", 15)
+//     .style("fill", "blue");
+
+// g.append("text")
+//     .attr("x", 30)
+//     .attr("y", 262)
+//     .attr("class", "legend")
+//     .text("Quarter 1");
+
+// // Quarter 2 Legend
+// g.append("rect")
+//     .attr("x", 105)
+//     .attr("y", 235)
+//     .attr("width", 75)
+//     .attr("height", 15)
+//     .style("fill", "purple");
+
+// g.append("text")
+//     .attr("x", 115)
+//     .attr("y", 262)
+//     .attr("class", "legend")
+//     .text("Quarter 2");
+
+// // Quarter 3 Legend
+// g.append("rect")
+//     .attr("x", 190)
+//     .attr("y", 235)
+//     .attr("width", 75)
+//     .attr("height", 15)
+//     .style("fill", "maroon");
+
+// g.append("text")
+//     .attr("x", 200)
+//     .attr("y", 262)
+//     .attr("class", "legend")
+//     .text("Quarter 3");
+
+// // Quarter 4 Legend
+// g.append("rect")
+//     .attr("x", 275)
+//     .attr("y", 235)
+//     .attr("width", 75)
+//     .attr("height", 15)
+//     .style("fill", "#FF7119");
+
+// g.append("text")
+//     .attr("x", 285)
+//     .attr("y", 262)
+//     .attr("class", "legend")
+//     .text("Quarter 4");
+
+
+//************************************************************* */
+// CHART 6 - pie chart
+//**************************************************************/
+
+d3.csv("data/top_100_youtubers.csv").then(function (data) {
+
+    var svg = d3.select('#chart6')
+        .append("svg")
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr('preserveAspectRatio', 'xMinYMin meet')
+        .attr('viewBox', '0 -20 500 400')
+        .attr("style", "background-color: #2c2b2b")
+        .style("box-shadow", "0 0 15px 2px #c0c0c055")
+        .style("border-radius", "4px")
 
 })
+
+
+
+
 
 
 

@@ -1,10 +1,8 @@
+//*************************************************************** */
+// CHART 5 - group bar horizontal
+//*************************************************************** */
 
-//***************************************************** */
-// CHART 4 - Top 5 channels' annual average view comparison
-//****************************************************** */
-
-
-var svgCh4 = d3.select('#chart4')
+var svgCh5 = d3.select('#chart5')
     .append("svg")
     .attr("width", "100%")
     .attr("height", "100%")
@@ -20,152 +18,168 @@ var innerHeight = height - padding;
 
 
 // Add Title
-svgCh4
+svgCh5
     .append("text")
     .attr("text-anchor", "center")
     .attr("x", innerWidth / 3.5)
     .attr("y", 15)
-    .text("Top 5 Channels' Annual Average View")
+    .text("Top 5 Channels' Quarterly Income")
     .style("fill", "#fff")
     .style("font-size", 17)
     .style("letter-spacing", 0.8)
 
 
 // Create the first group to add the chart
-var lcG = svgCh4.append('g')
-    .attr('transform', 'translate(50, 0)')
-    .attr('class', 'graph')
+var gbhG = svgCh5.append('g')
+    .attr('transform', 'translate(50, 30)')
 
 // Read data
-d3.csv("data/avg_view_every_year.csv").then((data) => {
+d3.csv("data/top_100_youtubers.csv").then((data) => {
 
-    // Extract the list of subjects from the data
-    var subjects = data.columns.slice(1);
+    const stackedBarChartData = [];
+    const topFiveYouTubers = [];
+    const totalEarningsGraph = [];
+    const topFive = data.slice(0, 5);
+    const maxEarnings = []
 
-    // color set for lines
-    var color = d3.scaleOrdinal()
-        .domain(data)
-        .range(['maroon', 'blue', 'purple', '#D4Af37', '#FF7119'])
+    // topFive.forEach((d) => {
+    //     const totalIncome =
+    //         parseFloat(d["Income q1"]) +
+    //         parseFloat(d["Income q2"]) +
+    //         parseFloat(d["Income q3"]) +
+    //         parseFloat(d["Income q4"]);
+    //     const roundedTotal = +totalIncome.toFixed(2);
+    //     stackedBarChartData.push({
+    //         channelName: d.ChannelName,
+    //         total: roundedTotal,
+    //     });
+    // });
 
-    // Add X scale
-    var lcxScale = d3
+    // extract quarterly incomes
+    let q1Values = topFive.map(d => +d["Income q1"])
+    console.log(q1Values)
+    let q2Values = topFive.map(d => +d["Income q2"])
+    let q3Values = topFive.map(d => +d["Income q3"])
+    let q4Values = topFive.map(d => +d["Income q4"])
+    console.log(q1Values)
+
+    let subGroups = [
+        { Q1: q1Values },
+        { Q2: q2Values },
+        { Q3: q3Values },
+        { Q4: q4Values },
+    ]
+
+    console.log(subGroups)
+
+
+    // stackedBarChartData.forEach((d) => totalEarningsGraph.push(d.total));
+    // topFive.forEach((y) => topFiveYouTubers.push(y.ChannelName));
+    // const quarterlyEarningsKey = data.columns.slice(19);
+    // const stackedEarnings = d3.stack().keys(quarterlyEarningsKey)(topFive);
+
+    // create xScale
+    const xScale = d3
         .scaleLinear()
-        .domain(
-            d3.extent(data, function (d) {
-                console.log(d.Year)
-                return +d.Year
-            })
-        )
-        .range([0, innerWidth]);
+        .domain(d3.extent([...q1Values, ...q2Values, ...q3Values, ...q4Values]))
+        .range([0, innerWidth - 20])
 
-    // create xAxis
-    var lcxAxis = d3.axisBottom().scale(lcxScale)
+    // create bottom axis
+    const xAxis = d3
+        .axisBottom()
+        .scale(xScale)
 
-    // add xAxis
-    lcG.append("g")
-        .attr("transform", `translate(0, ${innerHeight})`)
-        .call(lcxAxis.tickFormat(d3.format("d")).ticks(6))
-        .attr("color", "#c0c0c0");
+    /// append bottom axis to group
+    gbhG.append("g")
+        .attr("transform", "translate(0, " + innerHeight + ")")
+        .call(xAxis.tickFormat((d) => d / 1000 + "k"))
+        .style("color", "#c0c0c0")
+        .selectAll("text")
+        .style("font-size", "12px")
+    // .attr("transform", "rotate(-25)");
 
-    // create y scale
-    var lcyScale = d3
-        .scaleLinear()
-        .domain([
-            0,
-            d3.max(data, d => {
-                return +d3.max(subjects, function (subject) {
-                    return +d[subject];
-                });
-            }),
-        ])
-        .range([innerHeight, 40]);
+    // create scale and axis and append
+    const yScale = d3
+        .scaleBand()
+        .range([innerHeight, 0])
+        .domain(["Q1", "Q2", "Q3", "Q4"])
+        .paddingOuter([0.5])
+        .paddingInner([0.5])
 
-    // append yscale
-    lcG.append("g")
-        .call(d3.axisLeft(lcyScale)
-            .tickFormat((d) => d / 1000000 + "m")
-            .tickSize(5)).attr("color", "#c0c0c0");
+    const yAxis = d3.axisLeft().scale(yScale);
 
-    // Create background box for click on everywhere else to reset all lines
-    lcG.append("g")
-        .append("rect")
-        .attr("width", width)
-        .attr("height", height)
-        .attr("opacity", 0)
-        .on("click", function (e) {
+    gbhG.append("g")
+        .call(yAxis)
+        .style("color", "#c0c0c0")
+        .selectAll("text")
+        .style("font-size", "12px");
 
-            line.attr("opacity", 1);
-        });
-
-    // Add a line for each subject
-    var line = lcG
-        .selectAll(".line")
-        .data(subjects)
-        .enter()
-        .append("path")
-        .attr("class", function (d) {
-            return d;
-        })
-        .attr("fill", "none")
-        .attr("opacity", 1)
-        .attr("d", function (subject) {
-            return d3
-                .line()
-                .x(function (d) {
-                    return lcxScale(d.Year);
-                })
-                .y(function (d) {
-                    return lcyScale(+d[subject]);
-                })(data);
-        })
-        .style("stroke", function (s) {
-            return color([subjects.indexOf(s)]);
-        })
-        .attr("stroke-width", 3)
-
-    // Add legend group
-    var legend = lcG
-        .selectAll(".legend")
-        .data(subjects)
-        .enter()
-        .append("g")
-        .attr("class", "legend")
-        .attr("transform", function (subjects, i) {
-            return `translate(${i * 80}, ${0})`;
-        });
-
-    // add legend color box to legend group
-    legend
-        .append("rect")
-        .attr("x", 20)
-        .attr("y", height - 40)
-        .attr("width", 35)
-        .attr("height", 15)
-        .attr("name", function (d) {
-            return d;
-        })
-        .style("fill", function (subject) {
-            return color([subjects.indexOf(subject)]);
-        })
-        .on("click", function (event, d) {
-            console.log(event, d)
-            line.attr("opacity", 0);
-            d3.select("." + d).attr("opacity", 1);
-        });
-
-    //add legend text to legend group
-    legend
+    gbhG.append("g")
         .append("text")
-        .attr("x", 15)
-        .attr("y", height - 50)
-        .attr("dy", "0.2rem")
-        .style("text-anchor", "start")
-        .style("font-size", 13)
-        .style("fill", "#c0c0c0")
-        .style("font-family", "noto")
-        .text(function (d) {
+        .text("Total Earnings")
+        .attr("class", "side-axis")
+        .attr("fill", "#333")
+        .style("transform", "rotate(-90deg)")
+        .attr("x", -115)
+        .attr("y", -35)
+        .style("font-size", "10px");
 
-            return d;
+    // create color list for bars
+    const color = d3
+        .scaleOrdinal()
+        .domain(topFive.map((d) => d["ChannelName"]))
+        .range(['maroon', 'blue', 'purple', '#D4Af37', '#FF7119']);
+
+
+    // create subGroups for the bars
+    const barsGroup = gbhG.append("g")
+        .selectAll('g')
+        .data(topFive)
+        .attr("transform", `translate(0, d=> d["ChannelName"]})`)
+
+
+    gbhG.append('g')
+        .selectAll('g')
+        .data(topFive)
+        .join('g')
+        .attr('transform', `translate(20, 0)`)
+        .selectAll('rect')
+        .data(function (d) {
+            console.log(subGroups.map(function (key) {
+                return {
+                    'quarter': key, 'sales': d[key]
+                }
+            }))
+            return subGroups.map(function (key) {
+                return {
+                    'quarter': key, 'income': d[key]
+
+                }
+
+            });
         })
+        .join('rect')
+        .attr('x', 20)
+        .attr('y', d => yScale(d["ChannelName"]))
+        .attr('width', d => xScale(d["Income q1"]))
+        .attr('height', 20)
+        .attr('fill', d => color(d.quarter))
+
+
+    // gbhG.append("g")
+    //     .selectAll("g")
+    //     .data(stackedEarnings)
+    //     .join("g")
+    //     .attr("fill", (d) => color(d.key))
+    //     .selectAll("rect")
+    //     .data((d) => d)
+    //     .join("rect")
+    //     .attr("x", (d) => xScale(d.data.ChannelName))
+    //     .attr("y", (d) => yScale(d[1]))
+    //     .attr("width", xScale.bandwidth())
+    //     .attr("height", (d) => yScale(d[0]) - yScale(d[1]));
+
+
+
 
 })

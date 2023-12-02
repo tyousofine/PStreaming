@@ -374,7 +374,7 @@ svg
     .attr("text-anchor", "center")
     .attr("x", innerWidth / 3.5)
     .attr("y", 15)
-    .text("Number Youtubers in Each Country")
+    .text("Number of Youtubers in Each Country")
     .style("fill", "#fff")
     .style("font-size", 17)
     .style("letter-spacing", 0.8)

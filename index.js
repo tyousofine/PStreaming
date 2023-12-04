@@ -79,7 +79,7 @@ let chart1Svg = d3
     .attr('preserveAspectRatio', 'xMinYMin meet')
     .attr('viewBox', '0 -20 500 400')
     .attr("style", "background-color: #2c2b2b")
-    .style("box-shadow", "0 0 15px 2px #c0c0c055")
+    // .style("box-shadow", "0 0 15px 2px #c0c0c055")
     .style("border-radius", "4px")
 
 // set width and height for chart svg content
@@ -89,18 +89,18 @@ let bInner_height = height - padding - 20;
 let bG = chart1Svg
     .append("g")
     .attr("class", "group")
-    .attr("transform", "translate(65, 10)")
+    .attr("transform", "translate(65, 0)")
 
 // add bar chart title 
-bG
-    .append("text")
-    .attr("text-anchor", "center")
-    .attr("x", bInner_width / 8)
-    .attr("y", 0)
-    .text("Percentage of YouTubers per Category")
-    .style("fill", "#fff")
-    .style("font-size", 17)
-    .style("letter-spacing", 0.8)
+// bG
+//     .append("text")
+//     .attr("text-anchor", "center")
+//     .attr("x", bInner_width / 8)
+//     .attr("y", 0)
+//     .text("Percentage of YouTubers per Category")
+//     .style("fill", "#fff")
+//     .style("font-size", 17)
+//     .style("letter-spacing", 0.8)
 
 
 //prepare data
@@ -134,9 +134,11 @@ d3.csv("./data/top_100_youtubers.csv").then(function (data) {
 
     let bYscale = d3.scaleLinear().range([bInner_height + 20, 40]).domain([0, 50]);
 
+
+
     // create Axis'  
     let bXaxis = d3.axisBottom().scale(bXscale)
-    let bYaxis = d3.axisLeft().scale(bYscale) // add .tickFormat("") if you want numbers gone;
+    let bYaxis = d3.axisLeft().scale(bYscale)
 
     // append  xAxis
     const bottomAxis = bG.append("g")
@@ -162,7 +164,7 @@ d3.csv("./data/top_100_youtubers.csv").then(function (data) {
         .style("font-size", 8)
 
 
-    let graph = bG.selectAll(".graph").data(data).enter().append("g");
+    let graph = bG.selectAll(".graph1").data(data).enter().append("g");
 
     // add graph - bars
     graph
@@ -197,6 +199,29 @@ d3.csv("./data/top_100_youtubers.csv").then(function (data) {
         .attr("fill", "#D4Af37")
         .attr("class", "textChart")
         .style("font-size", 12)
+
+    // Define the brushing function
+    const brush = d3.brushX()
+        .extent([[-50, 290], [width, height]])
+        .on("brush end", brushed);
+
+    // Append the brushing area to the bottom axis
+    const brushingArea = bG.append("g")
+        .attr("class", "brush")
+        .call(brush);
+
+
+    // Define the brushed function
+    function brushed(event) {
+        const selection = event.selection;
+
+        // Change the text color based on the brushed selection
+        bottomAxis.selectAll('.tick text')
+            .style("font-size", function (d) {
+                const x = bXscale(d);
+                return (x >= selection[0] && x <= selection[1]) ? "13px" : "9px";
+            });
+    }
 });
 
 
@@ -205,40 +230,39 @@ d3.csv("./data/top_100_youtubers.csv").then(function (data) {
 // CHART 2 - scatter plot - Relationship between Likes and subscribers
 //********************************************************************** */
 
-// create svg for chart 1
-let svgChart2 = d3
-    .select("#chart2")
-    .append("svg")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr('preserveAspectRatio', 'xMinYMin meet')
-    .attr('viewBox', '0 -20 500 400')
-    .attr("style", "background-color: #2c2b2b")
-    .style("box-shadow", "0 0 15px 2px #c0c0c055")
-    .style("border-radius", "4px")
-
-const scatterPlotInnerWidth = width - padding
-const scatterPlotInnerHeight = height - padding;
-
-let spG = svgChart2
-    .append("g")
-    .attr("class", "group")
-    .attr("transform", "translate(65, 10)")
-
-// add scatterplot title 
-spG
-    .append("text")
-    .attr("text-anchor", "center")
-    .attr("x", bInner_width / 8)
-    .attr("y", 0)
-    .text("Relationship Between Likes and Subs")
-    .style("fill", "#fff")
-    .style("font-size", 17)
-    .style("letter-spacing", 0.8)
 
 
 // read data 
 d3.csv("./data/top_100_youtubers.csv").then(function (data) {
+    // create svg for chart
+    let svgChart2 = d3
+        .select("#chart2")
+        .append("svg")
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr('preserveAspectRatio', 'xMinYMin meet')
+        .attr('viewBox', '0 -20 500 400')
+        .attr("style", "background-color: #2c2b2b")
+        .style("border-radius", "4px")
+
+    const scatterPlotInnerWidth = width - padding
+    const scatterPlotInnerHeight = height - padding;
+
+    let spG = svgChart2
+        .append("g")
+        .attr("class", "group")
+        .attr("transform", "translate(65, 0)")
+
+    // // add scatterplot title 
+    // spG
+    //     .append("text")
+    //     .attr("text-anchor", "center")
+    //     .attr("x", bInner_width / 8)
+    //     .attr("y", 0)
+    //     .text("Relationship Between Likes and Subs")
+    //     .style("fill", "#fff")
+    //     .style("font-size", 17)
+    //     .style("letter-spacing", 0.8)
 
     // color set for circles
     var color = d3.scaleOrdinal()
@@ -301,7 +325,7 @@ d3.csv("./data/top_100_youtubers.csv").then(function (data) {
 
 
     // Populating the chart
-    spG
+    const circle = spG
         .selectAll("circle")
         .data(data)
         .join("circle")
@@ -346,6 +370,39 @@ d3.csv("./data/top_100_youtubers.csv").then(function (data) {
                 .attr("fill", "#fff")
                 .attr("opacity", ".5");
         });
+
+
+    // // Adding brushing
+    // const updateChart = ({ selection }) => {
+    //     // const { selection } = d3.event;
+    //     circle.classed("circle-selected", (d) =>
+    //         isBrushed(
+    //             selection,
+    //             xscale(d.Likes) + 40,
+    //             yscale(d.followers) + 40
+    //         )
+    //     );
+    // };
+
+    // const isBrushed = (edge, cx, cy) => {
+    //     const x0 = edge[0][0],
+    //         x1 = edge[1][0],
+    //         y0 = edge[0][1],
+    //         y1 = edge[1][1];
+
+    //     return x0 <= cx && x1 >= cx && y0 <= cy && y1 >= cy;
+    // };
+
+    // spG.call(
+    //     d3
+    //         .brush()
+    //         .extent([
+    //             [0, 0],
+    //             [scatterPlotInnerWidth - 100, scatterPlotInnerHeight - 100],
+    //         ])
+    //         .on("start brush", updateChart)
+    // );
+
 })
 
 //****************************************************** */
@@ -360,7 +417,6 @@ var svg = d3.select('#chart3')
     .attr('preserveAspectRatio', 'xMinYMin meet')
     .attr('viewBox', '0 -20 500 400')
     .attr("style", "background-color: #2c2b2b")
-    .style("box-shadow", "0 0 15px 2px #c0c0c055")
     .style("border-radius", "4px")
 
 // add paddings in svg
@@ -369,20 +425,20 @@ var innerHeight = height - padding;
 
 
 // Add Title
-svg
-    .append("text")
-    .attr("text-anchor", "center")
-    .attr("x", innerWidth / 3.5)
-    .attr("y", 15)
-    .text("Number of Youtubers in Each Country")
-    .style("fill", "#fff")
-    .style("font-size", 17)
-    .style("letter-spacing", 0.8)
+// svg
+//     .append("text")
+//     .attr("text-anchor", "center")
+//     .attr("x", innerWidth / 3.5)
+//     .attr("y", 15)
+//     .text("Number of Youtubers in Each Country")
+//     .style("fill", "#fff")
+//     .style("font-size", 17)
+//     .style("letter-spacing", 0.8)
 
 
 // Create the first group to add the chart
 var g = svg.append('g')
-    .attr('transform', 'translate(60, 10)')
+    .attr('transform', 'translate(60, 0)')
     .attr('class', 'graph')
 
 // 7. Get the data from the csv file
@@ -444,7 +500,7 @@ d3.csv('./data/top_100_youtubers.csv').then(function (data) {
 
 
     // create g for data bars
-    var graph = g.selectAll('.graph')
+    var graph = g.selectAll('.graph2')
         .data(data)
         .enter()
         .append('g')
@@ -508,7 +564,6 @@ var svgCh4 = d3.select('#chart4')
     .attr('preserveAspectRatio', 'xMinYMin meet')
     .attr('viewBox', '0 -20 500 400')
     .attr("style", "background-color: #2c2b2b")
-    .style("box-shadow", "0 0 15px 2px #c0c0c055")
     .style("border-radius", "4px")
 
 // add paddings in svg
@@ -517,15 +572,15 @@ var innerHeight = height - padding;
 
 
 // Add Title
-svgCh4
-    .append("text")
-    .attr("text-anchor", "center")
-    .attr("x", innerWidth / 3.5)
-    .attr("y", 15)
-    .text("Top 5 Channels' Annual Average View")
-    .style("fill", "#fff")
-    .style("font-size", 17)
-    .style("letter-spacing", 0.8)
+// svgCh4
+//     .append("text")
+//     .attr("text-anchor", "center")
+//     .attr("x", innerWidth / 3.5)
+//     .attr("y", 15)
+//     .text("Top 5 Channels' Annual Average View")
+//     .style("fill", "#fff")
+//     .style("font-size", 17)
+//     .style("letter-spacing", 0.8)
 
 
 // Create the first group to add the chart
@@ -706,7 +761,6 @@ var svgCh5 = d3.select('#chart5')
     .attr('preserveAspectRatio', 'xMinYMin meet')
     .attr('viewBox', '0 -20 500 400')
     .attr("style", "background-color: #2c2b2b")
-    .style("box-shadow", "0 0 15px 2px #c0c0c055")
     .style("border-radius", "4px")
 
 // add paddings in svg
@@ -714,21 +768,21 @@ var innerWidth = width - padding;
 var innerHeight = height - padding;
 
 
-// Add Title
-svgCh5
-    .append("text")
-    .attr("text-anchor", "center")
-    .attr("x", innerWidth / 3.5)
-    .attr("y", 15)
-    .text("Top 5 Channels' Quarterly Income")
-    .style("fill", "#fff")
-    .style("font-size", 17)
-    .style("letter-spacing", 0.8)
+// // Add Title
+// svgCh5
+//     .append("text")
+//     .attr("text-anchor", "center")
+//     .attr("x", innerWidth / 3.5)
+//     .attr("y", 15)
+//     .text("Top 5 Channels' Quarterly Income")
+//     .style("fill", "#fff")
+//     .style("font-size", 17)
+//     .style("letter-spacing", 0.8)
 
 
 // Create the first group to add the chart
 var hgcG = svgCh5.append('g')
-    .attr('transform', 'translate(0, 0)')
+    .attr('transform', 'translate(0, -10)')
 
 
 // read and apply data
@@ -764,14 +818,14 @@ d3.csv("data/top_100_youtubers.csv").then(function (data) {
     hgcG.append("g")
         .attr("transform", `translate(0, ${innerHeight})`)
         .call(xAxis.tickFormat((d) => d / 1000 + "k"))
-        .style("color", "#fff")
+        .style("color", "#c0c0c0")
         .style("font-family", "noto")
 
 
     const yAxisGroup = hgcG.append("g")
         .attr("transform", `translate(80, 0)`)
         .call(yAxis)
-        .style("color", "#fff")
+        .style("color", "#c0c0c0")
         .style("font-family", "noto")
 
 
@@ -810,9 +864,8 @@ d3.csv("data/top_100_youtubers.csv").then(function (data) {
         .data(topFive)
         .enter()
         .append('g')
-        .attr('transform', (d, i) => `translate(0, ${yScale(d.ChannelName)})`)
-
-    // apply bars to group
+        .attr('transform', (d, i) => `translate(3, ${yScale(d.ChannelName)})`)
+    // apply bars to grou
     const bars = barsGroup
         .selectAll('rect')
         .data(function (d) {
@@ -832,9 +885,10 @@ d3.csv("data/top_100_youtubers.csv").then(function (data) {
         .attr('height', 10)
         .attr('fill', d => color(d.quarter))
         .on("mouseover", function (d, i) {
-            //show the value
-            console.log("its working", i.value)
-            // helperFunction
+
+
+
+            // helperFunction - tooltip
             function showToolTip(d) {
                 return d.value;
             }
@@ -919,19 +973,184 @@ d3.csv("data/top_100_youtubers.csv").then(function (data) {
 // CHART 6 - pie chart
 //**************************************************************/
 
-d3.csv("data/top_100_youtubers.csv").then(function (data) {
+// list of countries
+let countryList = ['IN', 'US', 'KR', 'CA', 'BR', 'MX', 'SV', 'CL', 'NO', 'PR', 'BY', 'RU', 'PH', 'TH']
 
-    var svg = d3.select('#chart6')
-        .append("svg")
-        .attr("width", "100%")
-        .attr("height", "100%")
-        .attr('preserveAspectRatio', 'xMinYMin meet')
-        .attr('viewBox', '0 -20 500 400')
-        .attr("style", "background-color: #2c2b2b")
-        .style("box-shadow", "0 0 15px 2px #c0c0c055")
-        .style("border-radius", "4px")
+// create and append d3 dropdown for user country selection
+var dropdown = d3.select(".dropdown")
+    .append('select');
+
+dropdown.selectAll('option')
+    .data(countryList)
+    .enter()
+    .append('option')
+    .attr("id", "options")
+    .text(function (d) {
+        return d;
+    })
+    .attr('value', function (d) {
+        return d;
+    });
+
+
+// Dropdown onChange
+dropdown.on('change', function (d) {
+    var selectedCountry = d3.select(this).property("value");
+    switchCharts(selectedCountry)
 
 })
+
+// create chart canvas 
+var svgCh6 = d3.select('#chart6')
+    .append("svg")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr('preserveAspectRatio', 'xMinYMin meet')
+    .attr('viewBox', '0 -20 500 400')
+    .attr("style", "background-color: #2c2b2b")
+    .style("border-radius", "4px")
+
+
+// // Add Title
+// svgCh6
+//     .append("text")
+//     .attr("text-anchor", "center")
+//     .attr("x", innerWidth / 5)
+//     .attr("y", 15)
+//     .text("Youtube Channels by Category per Country")
+//     .style("fill", "#fff")
+//     .style("font-size", 17)
+//     .style("letter-spacing", 0.8)
+
+
+// // add starting default country title
+// var c6Title = svgCh6.append("text")
+//     .attr("class", "textChart")
+//     .attr("id", "subtitleC3")
+//     .attr("x", innerWidth / 1.7)
+//     .attr('y', 10)
+//     .text("IN") // default option
+//     .style("font-size", 20)
+//     .style("fill", "#fff")
+
+
+// event listener function for dropdown value change
+function switchCharts(selectedCountry = "IN") {
+
+    // remove all graph info from last selection
+
+    d3.selectAll('.graph6').remove()
+    d3.selectAll('.allPolylines').remove()
+    d3.selectAll('.allLabels').remove()
+
+    // Change Title
+    // c6Title.text(selectedCountry);
+
+
+    // importing data
+    d3.csv("data/top_100_youtubers.csv").then(function (data) {
+
+
+        // find the categories for selected country 
+        const categoryCounts = {};
+        data.forEach((obj) => {
+            if (obj['Country'] === selectedCountry) {
+                const category = obj['Category'];
+                if (category) {
+                    categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+                }
+            }
+        });
+
+        // Preparing data - return data to be used for chart
+        const categoryPerCountry = Object.entries(categoryCounts).filter(
+            (d) => d
+        );
+
+        // create group for chart elements
+        const pcG = svgCh6
+            .append("g")
+            .attr("transform", `translate(${innerWidth / 1.8}, ${innerHeight / 1.4})`)
+            .attr("class", "graph6");
+
+        // define radius
+        const radius = Math.min(innerWidth, innerHeight) / 2;
+
+        // color scheme 
+        const color = d3
+            .scaleOrdinal()
+            .range(['#FF7119', 'maroon', '#D4Af37', 'blue', 'purple',]);
+
+        // define the pie to be used for the chart
+        const pie = d3.pie().value((d) => {
+            return d[1];
+        });
+
+        // define the arc to be used for labels and long ticks
+        const arc = d3.arc().innerRadius(0).outerRadius(radius);
+
+        // label arc for being outside the pie chart
+        const labelArc = d3
+            .arc()
+            .innerRadius(radius)
+            .outerRadius(radius * 1.5);
+
+        // create the pie chart
+        pcG.selectAll(".graph6")
+            .data(pie(categoryPerCountry))
+            .join("path")
+            .attr("d", arc)
+            .attr("fill", (d) => color(d.data[0]))
+            .attr("stroke", "black")
+            .style("stroke-width", "2px");
+
+        //Add long ticks - polylines between chart and your labels.
+        pcG.selectAll(".allPolylines")
+            .data(pie(categoryPerCountry))
+            .join("polyline")
+            .attr("stroke", "#c0c0c0")
+            .attr("fill", "none")
+            .attr("stroke-width", 1)
+            .attr("points", (d) => {
+                let posA = arc.centroid(d);
+                let posB = labelArc.centroid(d);
+                let posC = labelArc.centroid(d);
+
+                const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+                console.log(posA[0])
+
+                posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1);
+                posC[0] = posC[0] < 0 ? posC[0] - 50 : posC[0] + 50;
+                return [posA, posB, posC];
+            });
+
+        // add labels to data
+        pcG.selectAll(".allLabels")
+            .data(pie(categoryPerCountry))
+            .join("text")
+            .text((d) => `${d.data[0]} (${d.data[1]})`)
+            .attr("transform", (d) => {
+                const pos = labelArc.centroid(d);
+                const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+                pos[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1);
+                pos[0] = pos[0] < 0 ? pos[0] - 50 : pos[0] + 10;
+                pos[1] -= 2;
+                return `translate(${pos})`;
+            })
+            .style("font-size", "12px")
+            .style("fill", "#c0c0c0");
+
+    })
+}
+
+// call switch chart to initiate the default value process on load.
+switchCharts()
+
+
+
+// **************************************************************
+// Single Value Charts
+// ***************************************************************
 
 
 

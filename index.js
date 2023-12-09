@@ -230,8 +230,6 @@ d3.csv("./data/top_100_youtubers.csv").then(function (data) {
 // CHART 2 - scatter plot - Relationship between Likes and subscribers
 //********************************************************************** */
 
-
-
 // read data 
 d3.csv("./data/top_100_youtubers.csv").then(function (data) {
     // create svg for chart
@@ -371,37 +369,18 @@ d3.csv("./data/top_100_youtubers.csv").then(function (data) {
                 .attr("opacity", ".5");
         });
 
+    var zoom = d3.zoom()
+        .extent([[0, 0], [width, height]])
+        .scaleExtent([1, 8])
+        .on('zoom', zoomed);
 
-    // // Adding brushing
-    // const updateChart = ({ selection }) => {
-    //     // const { selection } = d3.event;
-    //     circle.classed("circle-selected", (d) =>
-    //         isBrushed(
-    //             selection,
-    //             xscale(d.Likes) + 40,
-    //             yscale(d.followers) + 40
-    //         )
-    //     );
-    // };
+    svgChart2.call(zoom);
 
-    // const isBrushed = (edge, cx, cy) => {
-    //     const x0 = edge[0][0],
-    //         x1 = edge[1][0],
-    //         y0 = edge[0][1],
-    //         y1 = edge[1][1];
+    function zoomed({ transform }) {
+        console.log(transform);
 
-    //     return x0 <= cx && x1 >= cx && y0 <= cy && y1 >= cy;
-    // };
-
-    // spG.call(
-    //     d3
-    //         .brush()
-    //         .extent([
-    //             [0, 0],
-    //             [scatterPlotInnerWidth - 100, scatterPlotInnerHeight - 100],
-    //         ])
-    //         .on("start brush", updateChart)
-    // );
+        spG.attr('transform', `translate(${transform.x}, ${transform.y}) scale(${transform.k})`);
+    }
 
 })
 

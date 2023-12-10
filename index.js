@@ -990,28 +990,6 @@ var svgCh6 = d3.select('#chart6')
     .style("border-radius", "4px")
 
 
-// // Add Title
-// svgCh6
-//     .append("text")
-//     .attr("text-anchor", "center")
-//     .attr("x", innerWidth / 5)
-//     .attr("y", 15)
-//     .text("Youtube Channels by Category per Country")
-//     .style("fill", "#fff")
-//     .style("font-size", 17)
-//     .style("letter-spacing", 0.8)
-
-
-// // add starting default country title
-// var c6Title = svgCh6.append("text")
-//     .attr("class", "textChart")
-//     .attr("id", "subtitleC3")
-//     .attr("x", innerWidth / 1.7)
-//     .attr('y', 10)
-//     .text("IN") // default option
-//     .style("font-size", 20)
-//     .style("fill", "#fff")
-
 
 // event listener function for dropdown value change
 function switchCharts(selectedCountry = "IN") {
@@ -1021,9 +999,6 @@ function switchCharts(selectedCountry = "IN") {
     d3.selectAll('.graph6').remove()
     d3.selectAll('.allPolylines').remove()
     d3.selectAll('.allLabels').remove()
-
-    // Change Title
-    // c6Title.text(selectedCountry);
 
 
     // importing data
@@ -1049,11 +1024,11 @@ function switchCharts(selectedCountry = "IN") {
         // create group for chart elements
         const pcG = svgCh6
             .append("g")
-            .attr("transform", `translate(${innerWidth / 1.8}, ${innerHeight / 1.4})`)
+            .attr("transform", `translate(${innerWidth / 1.7}, ${innerHeight / 1.8})`)
             .attr("class", "graph6");
 
         // define radius
-        const radius = Math.min(innerWidth, innerHeight) / 2;
+        const radius = Math.min(innerWidth, innerHeight) / 2.5;
 
         // color scheme 
         const color = d3
@@ -1131,6 +1106,115 @@ switchCharts()
 // Single Value Charts
 // ***************************************************************
 
+
+// chart7 - category that has most followers
+d3.csv("data/top_100_youtubers.csv").then(function (data) {
+
+
+
+    // Find number of youtubers in each country
+    const categories = []
+    data.forEach((obj) => {
+        const category = obj['Category'];
+        if (category) {
+            categories[category] = (categories[category] || 0) + 1;
+        }
+    });
+
+    const categoryWithMostFollowers = Object.entries(categories).filter(
+        (d) => d[1] === d3.max(Object.entries(categories), (d) => d[1])
+    );
+
+    console.log("country with most youtubers: ", categoryWithMostFollowers)
+
+
+
+
+    // create chart canvas 
+    var svChart7 = d3.select("#chart7").append('g')
+
+    //Title Text and styling
+    svChart7.append("p").text("Category with most followers").attr("class", "title")
+
+    //Channel Name and styling
+    svChart7.append("p").text(categoryWithMostFollowers[0][0]).attr("class", "lineOne")
+    //Number of likes for the channel and styling
+    svChart7.append("p").text(categoryWithMostFollowers[0][1]).attr("class", "number")
+
+})
+
+
+
+// chart 8
+
+d3.csv("data/top_100_youtubers.csv").then(function (data) {
+
+    const svChart3Width = 100
+    const svChart3Height = 100
+
+    // Find the country with most youtubers
+    const youtuberPerCountry = [];
+    data.forEach((obj) => {
+        const country = obj['Country'];
+        if (country) {
+            youtuberPerCountry[country] = (youtuberPerCountry[country] || 0) + 1;
+        }
+    });
+
+    const countryWithMostYoutubers = Object.entries(youtuberPerCountry).filter(
+        (d) => d[1] === d3.max(Object.entries(youtuberPerCountry), (d) => d[1])
+    );
+
+
+    // create chart canvas 
+    var svChart8 = d3.select("#chart8")
+
+    //Title Text and styling
+    svChart8.append("p").text("Country with most youtubers").attr("class", "title")
+
+    //Channel Name and styling
+    svChart8.append("p").text(countryWithMostYoutubers[0][0]).attr("class", "lineOne")
+    //Number of likes for the channel and styling
+    svChart8.append("p").text(countryWithMostYoutubers[0][1]).attr("class", "number")
+
+})
+
+
+// CHART 9 - Name of channel with the most subs
+
+d3.csv("data/top_100_youtubers.csv").then(function (data) {
+
+
+    // Find channel with most subs
+    const channelsAndFollowers = [];
+    data.forEach((obj) => {
+        channelsAndFollowers.push(
+            {
+                channel: obj.ChannelName,
+                subs: parseInt(obj.followers)
+            }
+        )
+
+
+    });
+
+    const channelWithMostSubs = d3.max(channelsAndFollowers)
+
+    console.log("channel with most subs", channelWithMostSubs)
+
+
+    // create chart canvas 
+    var svChart9 = d3.select("#chart9")
+
+    //Title Text and styling
+    svChart9.append("p").text("Channel with most subscribers").attr("class", "title")
+
+    //Channel Name and styling
+    svChart9.append("p").text(channelWithMostSubs.channel).attr("class", "lineOne")
+    //Number of likes for the channel and styling
+    svChart9.append("p").text(channelWithMostSubs.subs / 1000000 + "m").attr("class", "number")
+
+})
 
 
 

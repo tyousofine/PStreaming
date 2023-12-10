@@ -63,6 +63,10 @@ body {
   font-family: var(--font-family-headers);
 }
 
+.main-nav .mainIcons {
+  display: none;
+ }
+
 .main-nav a {
   color: var(--brand-color);
   text-decoration: none;
@@ -129,11 +133,14 @@ body {
   font-size: 0.8rem;
   list-style: none;
   text-wrap: nowrap;
+  margin-bottom: 3px;
 }
 
 .navbar-left li a {
   text-decoration: none;
   color: var(--font-on-dark);
+  font-size: 0.8em;
+
 }
 .main.nav a:visited {
   text-decoration: none;
@@ -146,8 +153,9 @@ body {
 
 .navbar-left .categoryTitle {
     color: var(--brand-color);
+    font-size: 1.1;
     margin-top: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.9rem;
 }
 
 .main-content {
@@ -236,7 +244,8 @@ height: 30%;
 
 .title {
   color: var( --sec-brass);
-  /* padding: 10px 5px 5px 5px; */
+  font-size: 14px;
+  padding-bottom: 5px;
   
 }
 
@@ -247,7 +256,7 @@ height: 30%;
 
 .number {
   color: var(--brand-color);
-  /* padding-bottom: 5px; */
+  font-size: 20px;
   
 }
 
@@ -276,21 +285,50 @@ height: 30%;
 
 /* responsive queries  */
 @media only screen and (max-width: 800px) {
+.main-content {
+  margin: 0;
+  padding: 0;
 
+}
 
+.chart {
 
+}
+
+.main-content {
+  width: 100vw;
+
+}
 
   .charts-container  {
- display: grid;
- grid-template-columns: 1fr;
+   display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  
   }
 
  .chartRow1 {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction:column;
+  gap: 10px;
+  padding-top: 20px;
  }
 
+ .chartRow2 {
+  display: flex;
+  flex-direction:column;
+  gap: 10px;
+ }
+
+ .chartRow3 {
+  display: flex;
+  flex-direction:column;
+  gap: 10px;
  
+ }
+
 
   .navbar-left {
     display: none;
@@ -298,20 +336,42 @@ height: 30%;
   }
 
   .charts-container .singleValueChart-container {
-  
    flex-direction: row;
-    align-items: start;
-    justify-content: space-evenly;
- width: 100vw;
+    justify-content: space-between;
+    max-width: 500px;
     margin: 0;
     padding: 0;
     gap: 10px;
+    padding-bottom: 20px;
   }
 
   .singleValueChart-container .svChart {
     height: 100%;
     padding: 5px;
   
+  }
+
+  .logoImg {
+    width: 70px;
+  }
+  
+  .headers-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .headers-container h5 {
+    font-size: 0.6rem;
+  }
+
+  .main-nav .mainIcons {
+    display: block;
+    width: auto;
+    text-wrap: nowrap;
+    padding: 0 20px;
+  }
+
+  .mainLinks  {
+    display: none;
   }
 
 }

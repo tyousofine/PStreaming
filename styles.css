@@ -8,7 +8,7 @@
     --sec-brass: #D4Af37;
   
   
-    /* backgroun colors for dashboard */
+    /* background colors for dashboard */
     --bg-sides: #121212;
     --bg-main: #4B4A4A;
     --bg-main: #4B4A4A;
@@ -604,6 +604,14 @@
   display: table;
 }
 
+@media screen and (max-width: 500px) {
+  .contentContainer {
+
+    zoom: 0.7;
+  }
+  
+}
+
 .contentContainer .navagator {
   padding: 10px;
   margin: 5px 0;
@@ -731,7 +739,9 @@
   }
   .main-container {
     width: 100vw;
+
   } 
+  
 
   .main-nav .mainIcons {
     display: block;
